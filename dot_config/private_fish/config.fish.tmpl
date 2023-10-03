@@ -1,0 +1,14 @@
+if status is-interactive
+    # Commands to run in interactive sessions can go here
+end
+
+set -gx EDITOR micro
+{{ if eq .chezmoi.os "darwin" }}
+set -gx MICRO_CONFIG_HOME "/Users/$(whoami)/.config/micro"
+{{ else if eq .chezmoi.os "linux" }}
+set -gx MICRO_CONFIG_HOME "/home/$(whoami)/.config/micro"
+{{ end }}
+
+alias mc="micro"
+
+starship init fish | source
