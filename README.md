@@ -1,10 +1,16 @@
-# Configuration
-
+# Dotfiles
+## Dotfiles Manager
+[Chezmoi](https://www.chezmoi.io/)
+```
+$ chezmoi init --apply RichardFevrier
+```
+```
+$ chezmoi update -v
+```
 ## Desktop Environment (Linux)
 [Hyprland](https://hyprland.org/)
 ## Terminal
 [Wezterm](https://wezfurlong.org/wezterm/index.html)
-
 ## Unix shell
 [Fish](https://fishshell.com/)
 #### Change default shell
