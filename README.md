@@ -26,3 +26,9 @@ $ sudo dscl . -create /Users/$(whoami) UserShell /usr/local/bin/fish
 [Starship](https://starship.rs/) (`Nerd Font` already provided by `Wezterm`)
 ## Text Editor
 [Micro](https://micro-editor.github.io/)
+```
+$ sudo visudo
+```
+```
+Defaults    env_keep += "MICRO_CONFIG_HOME"
+```
