@@ -32,3 +32,5 @@ $ sudo visudo
 ```
 Defaults    env_keep += "MICRO_CONFIG_HOME"
 ```
+## Logitech devices (Linux)
+[Solaar](https://pwr-solaar.github.io/Solaar/)
