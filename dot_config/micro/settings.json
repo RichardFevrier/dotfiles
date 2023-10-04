@@ -1,3 +1,4 @@
 {
-    "colorscheme": "dracula"
+    "colorscheme": "dracula",
+    "statusformatr": "$(percentage)%, $(bind:ToggleKeyMenu): bindings, $(bind:ToggleHelp): help"
 }
