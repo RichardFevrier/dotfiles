@@ -17,24 +17,4 @@ config.colors = {
   scrollbar_thumb = '#f8f8f2'
 }
 
---[[
-config.keys = {
-  {
-    key = 'C',
-    mods = 'CTRL',
-    action = wezterm.action.CopyTo 'ClipboardAndPrimarySelection',
-  },
-  {
-    key = 'V',
-    mods = 'CTRL',
-    action = wezterm.action.PasteFrom 'Clipboard'
-  },
-  {
-    key = 'V',
-    mods = 'CTRL',
-    action = wezterm.action.PasteFrom 'PrimarySelection'
-  },
-}
---]]
-
 return config
