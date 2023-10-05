@@ -8,7 +8,8 @@ end
 
 config.front_end = "WebGpu"
 
-config.window_background_opacity = 0.7
+config.window_background_opacity = 0
+config.macos_window_background_blur = 40
 
 config.enable_scroll_bar = true
 
