@@ -1,0 +1,24 @@
+[character]
+error_symbol = "[λ](bold #dc7759)"
+success_symbol = "[λ](bold #dcb659)"
+
+[cmd_duration]
+style = "bold #dcb659"
+
+[directory]
+style = "bold #dcb659"
+truncation_length = 2
+truncate_to_repo = false
+
+[git_branch]
+style = "bold #59dcd8"
+
+[git_status]
+style = "bold #dc597f"
+
+[hostname]
+style = "bold #d32c5d"
+
+[username]
+format = "[$user]($style) on "
+style_user = "bold #dcb659"
