@@ -11,10 +11,10 @@ set -gx MICRO_CONFIG_HOME "/Users/$(whoami)/.config/micro"
 set -gx MICRO_CONFIG_HOME "/home/$(whoami)/.config/micro"
 {{ end }}
 
+fish_add_path "$HOME/.local/bin"
+
 set CARGO_ROOT "$HOME/.cargo"
 fish_add_path "$CARGO_ROOT/bin"
-
-fish_add_path "$HOME/.local/bin"
 
 alias mc="micro"
 
