@@ -3,7 +3,7 @@ if status is-interactive
 end
 
 set -gx EDITOR micro
-
+set -gx MICRO_TRUECOLOR 1
 # use Confs with sudo without passing param like '--preserve-env=HOME' if sudo $HOME points to /root or something else...
 {{ if eq .chezmoi.os "darwin" }}
 set -gx MICRO_CONFIG_HOME "/Users/$(whoami)/.config/micro"
