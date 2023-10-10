@@ -2,20 +2,31 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 
+fish_add_path $HOME/.local/bin
+
+set -gx CARGO_ROOT $HOME/.cargo
+fish_add_path $CARGO_ROOT/bin
+
+set -gx PYENV_ROOT $HOME/.pyenv
+fish_add_path $PYENV_ROOT/bin
+if command -v pyenv 1>/dev/null 2>&1
+  pyenv init - | source
+end
+fish_add_path $PYENV_ROOT/shims
+
 set -gx EDITOR micro
 set -gx MICRO_TRUECOLOR 1
-# use Confs with sudo without passing param like '--preserve-env=HOME' if sudo $HOME points to /root or something else...
+# set MICRO_CONFIG_HOME to be able to use Micro with sudo without passing param like '--preserve-env=HOME' if sudo $HOME points to /root or something else...
 {{ if eq .chezmoi.os "darwin" }}
-set -gx MICRO_CONFIG_HOME "/Users/$(whoami)/.config/micro"
+set -gx MICRO_CONFIG_HOME /Users/$(whoami)/.config/micro
 {{ else if eq .chezmoi.os "linux" }}
-set -gx MICRO_CONFIG_HOME "/home/$(whoami)/.config/micro"
+set -gx XDG_CONFIG_HOME $HOME/.config
+set -gx MICRO_CONFIG_HOME /home/$(whoami)/.config/micro
+set -gx DOCKER_HOST unix://$XDG_RUNTIME_DIR/podman/podman.sock
 {{ end }}
 
-fish_add_path "$HOME/.local/bin"
-
-set CARGO_ROOT "$HOME/.cargo"
-fish_add_path "$CARGO_ROOT/bin"
-
-alias mc="micro"
+alias mc=micro
 
 starship init fish | source
+
+#fish_config theme choose Bogster
