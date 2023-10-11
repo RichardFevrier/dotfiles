@@ -6,5 +6,7 @@
     "lsp.ignoreTriggerCharacters": "completion,signature",
     "lsp.server": "python=pylsp",
     "lsp.tabcompletion": true,
-    "statusformatr": "$(percentage)%, $(bind:ToggleKeyMenu): bindings, $(bind:ToggleHelp): help"
+    "rmtrailingws": true,
+    "statusformatr": "$(percentage)%, $(bind:ToggleKeyMenu): bindings, $(bind:ToggleHelp): help",
+    "tabstospaces": true,
 }
