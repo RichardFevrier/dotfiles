@@ -1,0 +1,19 @@
+# Bogster Theme
+
+fish_color_normal c6b8ad
+fish_color_command dcb659
+fish_color_quote 59dcb7
+fish_color_redirection dc7759
+fish_color_end 415367
+fish_color_error dc597f
+fish_color_comment abb2bf
+fish_color_operator dc7759
+fish_color_autosuggestion 415367
+fish_color_valid_path --underline 59dcb7
+
+fish_pager_color_prefix dcb659
+fish_pager_color_description dcb659
+fish_pager_color_selected_background --background=313f4e
+fish_pager_color_selected_prefix dc7759
+fish_pager_color_selected_completion 59dcd8
+fish_pager_color_selected_description 59dcd8
