@@ -1,8 +1,8 @@
-color-link default "#d32c5d,#161c23"
+color-link default "#c6b8ad,#161c23"
 color-link comment "#abb2bf"
 
 color-link identifier "#59dcd8"
-#color-link identifier.class "#dc597f"
+#color-link identifier.class "#00FF00"
 #color-link identifier.var "#00FF00"
 
 color-link constant "#59dcb7"
@@ -10,15 +10,20 @@ color-link constant.number "#36b2d4"
 color-link constant.string "#59dcb7"
 
 color-link symbol "#dc7759"
-color-link symbol.brackets "#dc7759"
 #color-link symbol.tag "#FF0000"
 
-color-link type "italic #d32c5d"
+color-link type "#dc597f"
 #color-link type.keyword "#00FF00"
 
 #color-link special "#00FF00"
 color-link statement "#dcb659"
-#color-link preproc "#00FF00"
+color-link statement.built_in "#59dcd8"
+#color-link statement.declaration "#00FF00"
+color-link statement.meta "#dc597f"
+
+color-link statement.reserved "#59dcd8"
+
+color-link preproc "#dc7759"
 
 #color-link underlined "#FF79C6"
 #color-link error "bold #FF5555"
