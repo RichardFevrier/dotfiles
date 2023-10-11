@@ -25,8 +25,8 @@ $ sudo dscl . -create /Users/$(whoami) UserShell /usr/local/bin/fish
 ## Shell prompt
 [Starship](https://starship.rs/) (`Nerd Font` already provided by `Wezterm`)
 ## Text Editor
-[Micro](https://micro-editor.github.io/)  
-  
+[Micro](https://micro-editor.github.io/)
+
 Do the following if you see a different configuration when using `sudo micro ...` (usually means that `$HOME` env var is different between `root` and `non-root` users):
 ```
 $ sudo visudo
@@ -34,5 +34,9 @@ $ sudo visudo
 ```
 Defaults    env_keep += "MICRO_CONFIG_HOME"
 ```
+#### Plugins
+- lsp
+- quoter
+- wc
 ## Logitech devices (Linux)
 [Solaar](https://pwr-solaar.github.io/Solaar/)
