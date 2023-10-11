@@ -1,5 +1,11 @@
 if status is-interactive
-    # Commands to run in interactive sessions can go here
+    function fish_greeting
+        # neofetch
+    end
+
+    starship init fish | source
+
+    # fish_config theme choose Bogster
 end
 
 fish_add_path $HOME/.local/bin
@@ -10,7 +16,7 @@ fish_add_path $CARGO_ROOT/bin
 set -gx PYENV_ROOT $HOME/.pyenv
 fish_add_path $PYENV_ROOT/bin
 if command -v pyenv 1>/dev/null 2>&1
-  pyenv init - | source
+    pyenv init - | source
 end
 fish_add_path $PYENV_ROOT/shims
 
@@ -26,7 +32,3 @@ set -gx DOCKER_HOST unix://$XDG_RUNTIME_DIR/podman/podman.sock
 {{ end }}
 
 alias mc=micro
-
-starship init fish | source
-
-#fish_config theme choose Bogster
