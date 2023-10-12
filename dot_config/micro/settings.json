@@ -11,5 +11,5 @@
     "rmtrailingws": true,
     "statusformatr": "$(percentage)%, $(bind:ToggleKeyMenu): bindings, $(bind:ToggleHelp): help",
     "tabmovement": true,
-    "tabstospaces": true,
+    "tabstospaces": true
 }
