@@ -38,5 +38,14 @@ Defaults    env_keep += "MICRO_CONFIG_HOME"
 - lsp
 - quoter
 - wc
+## Keyboard (Linux)
+To fix inverted keys e.g: `@/#` -> `</>`  
+Create `$ micro /etc/udev/hwdb.d/60-keyboard-logitech-craft.hwdb` (use `evtest` to find the right keys)
+```
+evdev:name:*Craft*:*
+    KEYBOARD_KEY_70064=grave
+    KEYBOARD_KEY_70035=102n
+```
+Then `$ sudo systemd-hwdb update` and `$ sudo udevadm trigger`  
 ## Logitech devices (Linux)
 [Solaar](https://pwr-solaar.github.io/Solaar/)
