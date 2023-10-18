@@ -6,12 +6,22 @@ if status is-interactive
     starship init fish | source
 
     fish_config theme choose Bogster
+
+    set -gx LS_COLORS $(vivid generate bogster)
 end
 
 fish_add_path $HOME/.local/bin
 
 set -gx CARGO_ROOT $HOME/.cargo
 fish_add_path $CARGO_ROOT/bin
+
+set -gx NODENV_ROOT $HOME/.nodenv
+fish_add_path $NODENV_ROOT/bin
+if command -v nodenv 1>/dev/null 2>&1
+    nodenv init - | source
+end
+fish_add_path $NODENV_ROOT/shims
+alias nodenv_update="cd ~/.nodenv/plugins/node-build && git pull"
 
 set -gx PYENV_ROOT $HOME/.pyenv
 fish_add_path $PYENV_ROOT/bin
