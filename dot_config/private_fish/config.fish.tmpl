@@ -30,6 +30,13 @@ if command -v pyenv 1>/dev/null 2>&1
 end
 fish_add_path $PYENV_ROOT/shims
 
+set -gx RBENV_ROOT $HOME/.rbenv
+fish_add_path $RBENV_ROOT/bin
+if command -v rbenv 1>/dev/null 2>&1
+    rbenv init - | source
+end
+fish_add_path $RBENV_ROOT/shims
+
 set -gx EDITOR micro
 set -gx MICRO_TRUECOLOR 1
 # set MICRO_CONFIG_HOME to be able to use Micro with sudo without passing param like '--preserve-env=HOME' if sudo $HOME points to /root or something else...
