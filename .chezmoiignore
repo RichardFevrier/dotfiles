@@ -3,6 +3,4 @@ README.md
 {{- if ne .chezmoi.os "linux" }}
 **/xkb/
 **/xkb/**/*
-**/solaar/
-**/solaar/**/*
 {{- end }}

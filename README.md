@@ -47,5 +47,3 @@ evdev:name:*Craft*:*
     KEYBOARD_KEY_70035=102n
 ```
 Then `$ sudo systemd-hwdb update` and `$ sudo udevadm trigger`  
-## Logitech devices (Linux)
-[Solaar](https://pwr-solaar.github.io/Solaar/)
