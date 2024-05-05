@@ -57,3 +57,11 @@ if type -q micro
 
     alias mc=micro
 end
+
+{{ if eq .chezmoi.os "linux" }}
+set -gx QT_QPA_PLATFORM wayland
+set -gx HSA_OVERRIDE_GFX_VERSION 10.3.0
+{{ end }}
+
+alias lsa="ls -la"
+alias rmf="rm -Rf"
