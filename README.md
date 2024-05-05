@@ -38,7 +38,9 @@ Defaults    env_keep += "MICRO_CONFIG_HOME"
 - lsp
 - quoter
 - wc
-## Keyboard (Linux)
+## Keyboard layout
+[Qwerty-Lafayette](https://github.com/fabi1cazenave/qwerty-lafayette/tree/v0.9)
+# (Linux)
 To fix inverted keys e.g: `@/#` -> `</>`  
 Create `$ micro /etc/udev/hwdb.d/60-keyboard-logitech-craft.hwdb` (use `evtest` to find the right keys)
 ```
