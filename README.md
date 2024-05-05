@@ -8,7 +8,7 @@ $ chezmoi init --apply RichardFevrier
 $ chezmoi update -v
 ```
 ## Desktop Environment (Linux)
-[Hyprland](https://hyprland.org/)
+[Niri](https://github.com/YaLTeR/niri)
 ## Terminal
 [Wezterm](https://wezfurlong.org/wezterm/index.html)
 ## Unix shell
