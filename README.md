@@ -19,6 +19,11 @@ $ chezmoi update -v
 $ sudo usermod --shell /usr/bin/fish $(whoami)
 ```
 ##### macOS
+###### Arm
+```
+$ sudo dscl . -create /Users/$(whoami) UserShell /opt/homebrew/bin/fish
+```
+###### Intel
 ```
 $ sudo dscl . -create /Users/$(whoami) UserShell /usr/local/bin/fish
 ```
