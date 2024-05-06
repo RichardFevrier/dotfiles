@@ -9,5 +9,19 @@
         <description>French (Qwerty-Lafayette)</description>
       </configItem>
     </layout>
+    <layout>
+      <configItem>
+        <name>ergol_dev</name>
+        <shortDescription>Ergo-L (dev)</shortDescription>
+        <description>Ergo-L (dev)</description>
+      </configItem>
+    </layout>
+    <layout>
+      <configItem>
+        <name>ergol_dev_angle_mod</name>
+        <shortDescription>Ergo-L (dev angle-mod)</shortDescription>
+        <description>Ergo-L (dev angle-mod)</description>
+      </configItem>
+    </layout>
   </layoutList>
 </xkbConfigRegistry>
