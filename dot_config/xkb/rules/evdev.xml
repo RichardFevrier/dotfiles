@@ -23,5 +23,12 @@
         <description>Ergo-L (dev angle-mod)</description>
       </configItem>
     </layout>
+    <layout>
+      <configItem>
+        <name>ergaie_angle_mod</name>
+        <shortDescription>Ergaie (angle-mod)</shortDescription>
+        <description>Ergaie (angle-mod)</description>
+      </configItem>
+    </layout>
   </layoutList>
 </xkbConfigRegistry>

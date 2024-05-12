@@ -44,7 +44,7 @@ Defaults    env_keep += "MICRO_CONFIG_HOME"
 - quoter
 - wc
 ## Keyboard layout
-[Ergo-L dev angle-mod](https://github.com/Nuclear-Squid/ergol) (files included for linux and macOS)
+[Ergaie angle-mod](https://github.com/MacDamien/Ergaie) (files included for linux and macOS)
 #### Tips
 To fix inverted keys e.g: `@/#` -> `</>`
 ##### Linux
