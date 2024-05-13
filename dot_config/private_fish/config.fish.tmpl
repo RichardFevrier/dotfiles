@@ -21,6 +21,13 @@ if type -q cargo
     fish_add_path $CARGO_ROOT/bin
 end
 
+if type -q goenv
+    set -gx GOENV_ROOT $HOME/.goenv
+    fish_add_path $GOENV_ROOT/bin
+    fish_add_path $GOENV_ROOT/shims
+    goenv init - | source
+end
+
 if type -q nodenv
     set -gx NODENV_ROOT $HOME/.nodenv
     fish_add_path $NODENV_ROOT/bin
