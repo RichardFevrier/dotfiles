@@ -16,19 +16,19 @@ end
 
 fish_add_path $HOME/.local/bin
 
-if type -q cargo
+if test -e $HOME/.cargo
     set -gx CARGO_ROOT $HOME/.cargo
     fish_add_path $CARGO_ROOT/bin
 end
 
-if type -q goenv
+if test -e $HOME/.goenv
     set -gx GOENV_ROOT $HOME/.goenv
     fish_add_path $GOENV_ROOT/bin
     fish_add_path $GOENV_ROOT/shims
     goenv init - | source
 end
 
-if type -q nodenv
+if test -e $HOME/.nodenv
     set -gx NODENV_ROOT $HOME/.nodenv
     fish_add_path $NODENV_ROOT/bin
     fish_add_path $NODENV_ROOT/shims
@@ -36,14 +36,14 @@ if type -q nodenv
     alias nodenv_update="cd ~/.nodenv/plugins/node-build && git pull"
 end
 
-if type -q pyenv
+if test -e $HOME/.pyenv
     set -gx PYENV_ROOT $HOME/.pyenv
     fish_add_path $PYENV_ROOT/bin
     fish_add_path $PYENV_ROOT/shims
     pyenv init - | source
 end
 
-if type -q rbenv
+if test -e $HOME/.rbenv
     set -gx RBENV_ROOT $HOME/.rbenv
     fish_add_path $RBENV_ROOT/bin
     fish_add_path $RBENV_ROOT/shims
