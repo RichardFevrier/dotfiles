@@ -14,40 +14,43 @@ if status is-interactive
     end
 end
 
-fish_add_path $HOME/.local/bin
+### Some paths are appended instead of default prepended for security reasons
+
+fish_add_path -g $HOME/.local/bin
 
 if test -e $HOME/.cargo
     set -gx CARGO_ROOT $HOME/.cargo
-    fish_add_path $CARGO_ROOT/bin
+    fish_add_path -ga $CARGO_ROOT/bin
 end
 
 if test -e $HOME/.goenv
     set -gx GOENV_ROOT $HOME/.goenv
-    fish_add_path $GOENV_ROOT/bin
-    fish_add_path $GOENV_ROOT/shims
+    fish_add_path -ga $GOENV_ROOT/bin
     goenv init - | source
+    fish_add_path -ga $GOROOT/bin
+    fish_add_path -ga $GOPATH/bin
+    alias goenv_update="cd ~/.goenv && git pull --recurse-submodules --jobs=10"
 end
 
 if test -e $HOME/.nodenv
     set -gx NODENV_ROOT $HOME/.nodenv
-    fish_add_path $NODENV_ROOT/bin
-    fish_add_path $NODENV_ROOT/shims
+    fish_add_path -ga $NODENV_ROOT/bin
     nodenv init - | source
-    alias nodenv_update="cd ~/.nodenv/plugins/node-build && git pull"
+    alias nodenv_update="cd ~/.nodenv/plugins/node-build && git pull --recurse-submodules --jobs=10"
 end
 
 if test -e $HOME/.pyenv
     set -gx PYENV_ROOT $HOME/.pyenv
-    fish_add_path $PYENV_ROOT/bin
-    fish_add_path $PYENV_ROOT/shims
+    fish_add_path -ga $PYENV_ROOT/bin
     pyenv init - | source
+    alias pyenv_update="cd ~/.pyenv && git pull --recurse-submodules --jobs=10"
 end
 
 if test -e $HOME/.rbenv
     set -gx RBENV_ROOT $HOME/.rbenv
-    fish_add_path $RBENV_ROOT/bin
-    fish_add_path $RBENV_ROOT/shims
+    fish_add_path -g $RBENV_ROOT/bin
     rbenv init - | source
+    alias rbenv_update="cd ~/.rbenv && git pull --recurse-submodules --jobs=10"
 end
 
 if type -q micro
@@ -62,7 +65,7 @@ if type -q micro
     set -gx DOCKER_HOST unix://$XDG_RUNTIME_DIR/podman/podman.sock
     {{ end }}
 
-    alias mc=micro
+    alias mc="micro"
 end
 
 {{ if eq .chezmoi.os "linux" }}
