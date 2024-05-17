@@ -1,6 +1,8 @@
+format = "$all$line_break$shlvl$shell$character"
+
 [character]
-error_symbol = "[λ](bold #dc7759)"
-success_symbol = "[λ](bold #dcb659)"
+error_symbol = "[\\$](bold #dc7759)"
+success_symbol = "[\\$](bold #dcb659)"
 
 [cmd_duration]
 style = "bold #dcb659"
@@ -18,6 +20,18 @@ style = "bold #dc597f"
 
 [hostname]
 style = "bold #d32c5d"
+
+[shell]
+disabled = false
+
+[shlvl]
+disabled = false
+format = '$symbol '
+symbol = '❯'
+repeat = true
+
+[sudo]
+disabled = false
 
 [username]
 format = "[$user]($style) on "
