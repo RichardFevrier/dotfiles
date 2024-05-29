@@ -18,23 +18,6 @@ end
 
 fish_add_path -g $HOME/.local/bin
 
-{{ if eq .chezmoi.os "darwin" }}
-{{ if eq .chezmoi.arch "amd64" }}
-if test -d /usr/local
-    set -gx HOMEBREW_PREFIX /usr/local
-{{ else }}
-if test -d /opt/homebrew
-    set -gx HOMEBREW_PREFIX /opt/homebrew
-{{ end }}
-{{ else if eq .chezmoi.os "linux" }}
-if test -d /home/linuxbrew/.linuxbrew
-    set -gx HOMEBREW_PREFIX /home/linuxbrew/.linuxbrew
-{{ end }}
-    set -gx HOMEBREW_CELLAR $HOMEBREW_PREFIX/Cellar
-    set -gx HOMEBREW_REPOSITORY $HOMEBREW_PREFIX/homebrew
-    fish_add_path -ga $HOMEBREW_PREFIX/bin $HOMEBREW_PREFIX/sbin
-end
-
 if test -e $HOME/.cargo
     set -gx CARGO_ROOT $HOME/.cargo
     fish_add_path -ga $CARGO_ROOT/bin
@@ -70,17 +53,34 @@ if test -e $HOME/.rbenv
     alias rbenv_update="cd ~/.rbenv && git pull --recurse-submodules --jobs=10"
 end
 
+{{ if eq .chezmoi.os "darwin" -}}
+{{ if eq .chezmoi.arch "amd64" -}}
+if test -d /usr/local
+    set -gx HOMEBREW_PREFIX /usr/local
+{{- else -}}
+if test -d /opt/homebrew
+    set -gx HOMEBREW_PREFIX /opt/homebrew
+{{- end }}
+{{- else if eq .chezmoi.os "linux" -}}
+if test -d /home/linuxbrew/.linuxbrew
+    set -gx HOMEBREW_PREFIX /home/linuxbrew/.linuxbrew
+{{- end }}
+    set -gx HOMEBREW_CELLAR $HOMEBREW_PREFIX/Cellar
+    set -gx HOMEBREW_REPOSITORY $HOMEBREW_PREFIX/homebrew
+    fish_add_path -ga $HOMEBREW_PREFIX/bin $HOMEBREW_PREFIX/sbin
+end
+
 if type -q micro
     set -gx EDITOR micro
     set -gx MICRO_TRUECOLOR 1
     # set MICRO_CONFIG_HOME to be able to use Micro with sudo without passing param like '--preserve-env=HOME' if sudo $HOME points to /root or something else...
-    {{ if eq .chezmoi.os "darwin" }}
+    {{ if eq .chezmoi.os "darwin" -}}
     set -gx MICRO_CONFIG_HOME /Users/$(whoami)/.config/micro
-    {{ else if eq .chezmoi.os "linux" }}
+    {{- else if eq .chezmoi.os "linux" -}}
     set -gx XDG_CONFIG_HOME $HOME/.config
     set -gx MICRO_CONFIG_HOME /home/$(whoami)/.config/micro
     set -gx DOCKER_HOST unix://$XDG_RUNTIME_DIR/podman/podman.sock
-    {{ end }}
+    {{- end }}
 
     alias mc="micro"
 end
