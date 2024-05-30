@@ -12,6 +12,10 @@ if status is-interactive
     if type -q vivid
          set -gx LS_COLORS $(vivid generate bogster)
     end
+
+    if type -q fzf
+        fzf --fish | source
+    end
 end
 
 ### Some paths are appended instead of default prepended for security reasons
@@ -90,5 +94,28 @@ set -gx QT_QPA_PLATFORM wayland
 set -gx HSA_OVERRIDE_GFX_VERSION 10.3.0
 {{ end }}
 
-alias lsa="ls -la"
+
+
 alias rmf="rm -Rf"
+
+if type -q eza
+    alias lsa="eza -la"
+else
+    alias lsa="ls -la"
+end
+
+if type -q fzf
+    if type -q bat
+        if type -q micro
+            alias fz="fzf --preview 'bat --style=numbers --color=always {}' | xargs -n 1 micro"
+        else
+            alias fz="fzf --preview 'bat --style=numbers --color=always {}' | xargs -n 1 vi"
+        end
+    else
+        if type -q micro
+            alias fz="fzf | xargs -n 1 micro"
+        else
+            alias fz="fzf | xargs -n 1 vi"
+        end
+    end
+end
