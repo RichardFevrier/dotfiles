@@ -1,21 +1,5 @@
 if status is-interactive
     fish_config theme choose Bogster
-
-    function fish_greeting
-        # neofetch
-    end
-
-    if type -q starship
-        starship init fish | source
-    end
-
-    if type -q vivid
-         set -gx LS_COLORS $(vivid generate bogster)
-    end
-
-    if type -q fzf
-        fzf --fish | source
-    end
 end
 
 ### Some paths are appended instead of default prepended for security reasons
@@ -70,8 +54,12 @@ if test -d /home/linuxbrew/.linuxbrew
     set -gx HOMEBREW_PREFIX /home/linuxbrew/.linuxbrew
 {{- end }}
     set -gx HOMEBREW_CELLAR $HOMEBREW_PREFIX/Cellar
-    set -gx HOMEBREW_REPOSITORY $HOMEBREW_PREFIX/homebrew
+    set -gx HOMEBREW_REPOSITORY $HOMEBREW_PREFIX/Homebrew
     fish_add_path -ga $HOMEBREW_PREFIX/bin $HOMEBREW_PREFIX/sbin
+end
+
+if type -q fzf
+    fzf --fish | source
 end
 
 if type -q micro
@@ -89,14 +77,33 @@ if type -q micro
     alias mc="micro"
 end
 
+if status is-interactive
+    if type -q neofetch
+        function fish_greeting
+            # neofetch
+        end
+    end
+
+    if type -q starship
+        starship init fish | source
+    end
+
+    if type -q vivid
+        set -gx LS_COLORS $(vivid generate bogster)
+    end
+end
+
 {{ if eq .chezmoi.os "linux" }}
 set -gx QT_QPA_PLATFORM wayland
 set -gx HSA_OVERRIDE_GFX_VERSION 10.3.0
 {{ end }}
 
 
-
-alias rmf="rm -Rf"
+{{ if eq .chezmoi.os "linux" }}
+if test -n "$(flatpak list --app --columns application | grep com.vscodium.codium)"
+    alias code="flatpak run com.vscodium.codium --ozone-platform=wayland"
+end
+{{ end }}
 
 if type -q eza
     alias lsa="eza -la"
@@ -119,3 +126,5 @@ if type -q fzf
         end
     end
 end
+
+alias rmf="rm -Rf"

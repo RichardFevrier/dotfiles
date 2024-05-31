@@ -16,19 +16,18 @@ $ chezmoi update -v
 #### Change default shell
 ##### Linux
 ```
-$ sudo usermod --shell /usr/bin/fish $(whoami)
+$ sudo usermod --shell $(which fish) $(whoami)
 ```
 ##### macOS
-###### Arm
 ```
-$ sudo dscl . -create /Users/$(whoami) UserShell /opt/homebrew/bin/fish
-```
-###### Intel
-```
-$ sudo dscl . -create /Users/$(whoami) UserShell /usr/local/bin/fish
+$ sudo dscl . -create /Users/$(whoami) UserShell $(which fish)
 ```
 ## Shell prompt
 [Starship](https://starship.rs/) (`Nerd Font` already provided by `Wezterm`)
+## Fuzzy Finder
+[Fzf](https://github.com/junegunn/fzf)
+#### Tips
+`Ctrl+R` to fuzzy the commands history
 ## Text Editor
 [Micro](https://micro-editor.github.io/)
 
@@ -43,8 +42,14 @@ Defaults    env_keep += "MICRO_CONFIG_HOME"
 - lsp
 - quoter
 - wc
+## Cat replacement
+[Bat](https://github.com/sharkdp/bat)
+## Find replacement
+[Fd](https://github.com/sharkdp/fd)
+## Ls replacement
+[Eza](https://github.com/eza-community/eza)
 ## Keyboard layout
-[Ergaie angle-mod](https://github.com/MacDamien/Ergaie) (files included for linux and macOS)
+[Qwerty-Lafayette](https://github.com/fabi1cazenave/qwerty-lafayette) (files included for linux and macOS)
 #### Tips
 To fix inverted keys e.g: `@/#` -> `</>`
 ##### Linux
