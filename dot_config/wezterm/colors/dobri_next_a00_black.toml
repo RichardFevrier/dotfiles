@@ -1,0 +1,7 @@
+[colors]
+background = "#000000"
+foreground = "#ced5e5"
+scrollbar_thumb = "#18222d"
+cursor_bg = "#ffd300"
+cursor_border = "#ffd300"
+selection_bg = "#18222d"
