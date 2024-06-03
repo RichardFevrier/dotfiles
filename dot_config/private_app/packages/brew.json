@@ -1,0 +1,3 @@
+{
+	"packages": "bat bottom chezmoi eza fd fish fzf git-lfs golangci-lint micro neofetch pre-commit starship streamlink vivid"
+}
