@@ -1,25 +1,25 @@
 format = "$all$line_break$shlvl$shell$character"
 
 [character]
-error_symbol = "[\\$](bold #dc7759)"
-success_symbol = "[\\$](bold #dcb659)"
+error_symbol = "[\\$](bold #fb467b)"
+success_symbol = "[\\$](bold #56d6d6)"
 
 [cmd_duration]
-style = "bold #dcb659"
+style = "bold #C3E88D"
 
 [directory]
-style = "bold #dcb659"
+style = "bold #C3E88D"
 truncation_length = 2
 truncate_to_repo = false
 
 [git_branch]
-style = "bold #59dcd8"
+style = "bold #CB6CFE"
 
 [git_status]
-style = "bold #dc597f"
+style = "bold #fb467b"
 
 [hostname]
-style = "bold #d32c5d"
+style = "bold #56D6D6"
 
 [shell]
 disabled = false
@@ -35,4 +35,4 @@ disabled = false
 
 [username]
 format = "[$user]($style) on "
-style_user = "bold #dcb659"
+style_user = "bold #6796E6"
