@@ -10,7 +10,7 @@ $ chezmoi update -v
 ## Desktop Environment (Linux)
 [Niri](https://github.com/YaLTeR/niri)
 ## Font
-[Meslo LG](https://github.com/andreberg/Meslo-Font)
+[Meslo LG](https://github.com/andreberg/Meslo-Font)  (files included for linux and macOS)
 ## Terminal
 [Wezterm](https://wezfurlong.org/wezterm/index.html)
 ## Unix shell
