@@ -8,6 +8,8 @@ README.md
 {{- end }}
 
 {{- if ne .chezmoi.os "linux" }}
+**/.var/
+**/.var/**/*
 **/.local/
 **/.local/**/*
 **/xkb/
