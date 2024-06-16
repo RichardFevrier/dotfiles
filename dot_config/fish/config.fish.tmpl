@@ -101,11 +101,15 @@ set -gx HSA_OVERRIDE_GFX_VERSION 10.3.0
 
 alias cl="clear"
 
-{{ if eq .chezmoi.os "linux" }}
+{{ if eq .chezmoi.os "darwin" -}}
+alias code="/Applications/VSCodium.app/Contents/Resources/app/bin/codium"
+{{- else if eq .chezmoi.os "linux" -}}
 if test -n "$(flatpak list --app --columns application | grep com.vscodium.codium)"
-    alias code="flatpak run com.vscodium.codium --ozone-platform=wayland"
+alias code="flatpak run com.vscodium.codium --ozone-platform=wayland"
 end
-{{ end }}
+{{- end }}
+
+alias cz="chezmoi"
 
 if type -q eza
     alias lsa="eza -la"

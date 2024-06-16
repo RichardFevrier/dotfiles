@@ -1,4 +1,5 @@
 README.md
+**/.DS_Store
 
 {{- if ne .chezmoi.os "darwin" }}
 **/karabiner/
@@ -10,8 +11,6 @@ README.md
 {{- if ne .chezmoi.os "linux" }}
 **/.var/
 **/.var/**/*
-**/.local/
-**/.local/**/*
 **/xkb/
 **/xkb/**/*
 {{- end }}

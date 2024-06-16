@@ -1,11 +1,13 @@
 {
-	"[go]": {
+    "[go]": {
 		"editor.insertSpaces": false,
 		"editor.formatOnSave": false
 	},
-	"editor.fontFamily": "'MesloLGS NF'",
-	"editor.fontSize": 14.5,
-	"git.openRepositoryInParentFolders": "never",
+    "editor.fontFamily": "'Fira Code'",
+    "editor.fontLigatures": "'cv02', 'cv29', 'ss01', 'ss03', 'ss05'",
+    "editor.fontSize": 14.5,
+    "editor.lineHeight": 1.5,
+    "git.openRepositoryInParentFolders": "never",
 	"terminal.explorerKind": "external",
 	"terminal.external.linuxExec": "wezterm",
 	"window.customTitleBarVisibility": "auto",
