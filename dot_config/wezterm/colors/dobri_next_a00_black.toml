@@ -1,4 +1,14 @@
 [colors]
+ansi = [
+    "#000000",
+    "#fb467b",
+    "#c3e88d",
+    "#ffd300",
+    "#6796E6",
+    "#ae81ff",
+    "#56d6d6",
+    "#ced5e5",
+]
 background = "#000000"
 foreground = "#ced5e5"
 cursor_bg = "#ffd300"

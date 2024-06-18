@@ -10,8 +10,13 @@ config.color_scheme = 'dobri_next_a00_black'
 config.font = wezterm.font {
   family = 'Fira Code',
   harfbuzz_features = { 'cv02', 'cv29', 'ss01', 'ss03', 'ss05' },
+  weight = 400,
 }
+{{ if eq .chezmoi.os "darwin" -}}
 config.font_size = 14.5
+{{- else if eq .chezmoi.os "linux" -}}
+config.font_size = 10.5
+{{- end }}
 config.line_height = 1.22
 config.front_end = 'WebGpu'
 config.enable_scroll_bar = true
