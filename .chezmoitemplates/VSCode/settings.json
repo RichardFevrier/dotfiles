@@ -6,6 +6,11 @@
     "editor.fontFamily": "'Fira Code'",
     "editor.fontLigatures": "'cv02', 'cv29', 'ss01', 'ss03', 'ss05'",
     "editor.fontSize": 14.5,
+    {{ if eq .chezmoi.os "darwin" -}}
+    "editor.fontWeight": 300,
+    {{- else if eq .chezmoi.os "linux" -}}
+    "editor.fontWeight": 400,
+    {{- end }}
     "editor.lineHeight": 1.5,
     "git.openRepositoryInParentFolders": "never",
 	"terminal.explorerKind": "external",
