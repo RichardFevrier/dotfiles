@@ -6,12 +6,12 @@ end
 
 fish_add_path -g $HOME/.local/bin
 
-if test -e $HOME/.cargo
+if test -d $HOME/.cargo
     set -gx CARGO_ROOT $HOME/.cargo
     fish_add_path -ga $CARGO_ROOT/bin
 end
 
-if test -e $HOME/.goenv
+if test -d $HOME/.goenv
     set -gx GOENV_ROOT $HOME/.goenv
     fish_add_path -ga $GOENV_ROOT/bin
     goenv init - | source
@@ -20,21 +20,21 @@ if test -e $HOME/.goenv
     alias goenv_update="cd ~/.goenv && git pull --recurse-submodules --jobs=10"
 end
 
-if test -e $HOME/.nodenv
+if test -d $HOME/.nodenv
     set -gx NODENV_ROOT $HOME/.nodenv
     fish_add_path -ga $NODENV_ROOT/bin
     nodenv init - | source
     alias nodenv_update="cd ~/.nodenv/plugins/node-build && git pull --recurse-submodules --jobs=10"
 end
 
-if test -e $HOME/.pyenv
+if test -d $HOME/.pyenv
     set -gx PYENV_ROOT $HOME/.pyenv
     fish_add_path -ga $PYENV_ROOT/bin
     pyenv init - | source
     alias pyenv_update="cd ~/.pyenv && git pull --recurse-submodules --jobs=10"
 end
 
-if test -e $HOME/.rbenv
+if test -d $HOME/.rbenv
     set -gx RBENV_ROOT $HOME/.rbenv
     fish_add_path -g $RBENV_ROOT/bin
     rbenv init - | source
@@ -74,7 +74,7 @@ if type -q micro
     set -gx DOCKER_HOST unix://$XDG_RUNTIME_DIR/podman/podman.sock
     {{- end }}
 
-    alias mc="micro"
+    alias mc=micro
 end
 
 if status is-interactive
@@ -99,17 +99,23 @@ set -gx HSA_OVERRIDE_GFX_VERSION 10.3.0
 {{ end }}
 
 
-alias cl="clear"
+alias cl=clear
 
 {{ if eq .chezmoi.os "darwin" -}}
-alias code="/Applications/VSCodium.app/Contents/Resources/app/bin/codium"
+if test -d "/Applications/VSCodium.app"
+    alias code="/Applications/VSCodium.app/Contents/Resources/app/bin/codium"
+else if test -d "/Applications/Visual Studio Code.app"
+    alias code="/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code"
+end
 {{- else if eq .chezmoi.os "linux" -}}
 if test -n "$(flatpak list --app --columns application | grep com.vscodium.codium)"
-alias code="flatpak run com.vscodium.codium --ozone-platform=wayland"
+    alias code="flatpak run com.vscodium.codium --ozone-platform=wayland"
+else if test -n "$(flatpak list --app --columns application | grep com.visualstudio.code)"
+    alias code="flatpak run com.visualstudio.code --ozone-platform=wayland"
 end
 {{- end }}
 
-alias cz="chezmoi"
+alias cz=chezmoi
 
 if type -q eza
     alias lsa="eza -la"
@@ -120,15 +126,31 @@ end
 if type -q fzf
     if type -q bat
         if type -q micro
-            alias fz="fzf --preview 'bat --style=numbers --color=always {}' | xargs -n 1 micro"
+            {{ if eq .chezmoi.os "darwin" -}}
+            alias fz="fzf --preview 'bat --style=numbers --color=always {}' | xargs --max-args 1 micro"
+            {{- else if eq .chezmoi.os "linux" -}}
+            alias fz="fzf --preview 'bat --style=numbers --color=always {}' | xargs --max-args 1 --no-run-if-empty micro"
+            {{- end }}
         else
-            alias fz="fzf --preview 'bat --style=numbers --color=always {}' | xargs -n 1 vi"
+            {{ if eq .chezmoi.os "darwin" -}}
+            alias fz="fzf --preview 'bat --style=numbers --color=always {}' | xargs --max-args 1 vi"
+            {{- else if eq .chezmoi.os "linux" -}}
+            alias fz="fzf --preview 'bat --style=numbers --color=always {}' | xargs --max-args 1 --no-run-if-empty vi"
+            {{- end }}
         end
     else
         if type -q micro
-            alias fz="fzf | xargs -n 1 micro"
+            {{ if eq .chezmoi.os "darwin" -}}
+            alias fz="fzf | xargs --max-args 1 micro"
+            {{- else if eq .chezmoi.os "linux" -}}
+            alias fz="fzf | xargs --max-args 1 --no-run-if-empty micro"
+            {{- end }}
         else
-            alias fz="fzf | xargs -n 1 vi"
+            {{ if eq .chezmoi.os "darwin" -}}
+            alias fz="fzf | xargs --max-args 1 vi"
+            {{- else if eq .chezmoi.os "linux" -}}
+            alias fz="fzf | xargs --max-args 1 --no-run-if-empty vi"
+            {{- end }}
         end
     end
 end
