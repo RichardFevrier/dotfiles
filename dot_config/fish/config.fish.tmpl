@@ -1,6 +1,10 @@
-if status is-interactive
-    fish_config theme choose Bogster
-end
+{{ if eq .chezmoi.os "linux" -}}
+set -gx HSA_OVERRIDE_GFX_VERSION 10.3.0
+set -gx QT_QPA_PLATFORM wayland
+set -gx XDG_CONFIG_HOME $HOME/.config
+{{- end }}
+
+
 
 ### Some paths are appended instead of default prepended for security reasons
 
@@ -69,34 +73,12 @@ if type -q micro
     {{ if eq .chezmoi.os "darwin" -}}
     set -gx MICRO_CONFIG_HOME /Users/$(whoami)/.config/micro
     {{- else if eq .chezmoi.os "linux" -}}
-    set -gx XDG_CONFIG_HOME $HOME/.config
     set -gx MICRO_CONFIG_HOME /home/$(whoami)/.config/micro
-    set -gx DOCKER_HOST unix://$XDG_RUNTIME_DIR/podman/podman.sock
     {{- end }}
 
     alias mc=micro
 end
 
-if status is-interactive
-    if type -q neofetch
-        function fish_greeting
-            # neofetch
-        end
-    end
-
-    if type -q starship
-        starship init fish | source
-    end
-
-    if type -q vivid
-        set -gx LS_COLORS $(vivid generate bogster)
-    end
-end
-
-{{ if eq .chezmoi.os "linux" }}
-set -gx QT_QPA_PLATFORM wayland
-set -gx HSA_OVERRIDE_GFX_VERSION 10.3.0
-{{ end }}
 
 
 alias cl=clear
@@ -156,3 +138,23 @@ if type -q fzf
 end
 
 alias rmf="rm -Rf"
+
+
+
+if status is-interactive
+    fish_config theme choose Bogster
+
+    if type -q neofetch
+        function fish_greeting
+            # neofetch
+        end
+    end
+
+    if type -q starship
+        starship init fish | source
+    end
+
+    if type -q vivid
+        set -gx LS_COLORS $(vivid generate bogster)
+    end
+end
