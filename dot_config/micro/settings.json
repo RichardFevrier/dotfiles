@@ -1,19 +1,28 @@
 {
+    "*.odin": {
+        "commenttype": "// %s"
+    },
     "colorscheme": "dobri_next_a00_black",
     "diffgutter": true,
     "ft:markdown": {
         "rmtrailingws": false
     },
+    "fzfarg": "--preview 'bat --style=numbers --color=always {}'",
+    "hlsearch": true,
     "indentchar": "|",
-    "lsp.autocompleteDetails": false,
+    "lsp.autocompleteDetails": true,
     "lsp.ignoreMessages": "LS message1 to ignore|LS message 2 to ignore|...",
     "lsp.ignoreTriggerCharacters": "completion,signature",
-    "lsp.server": "python=pylsp",
+    "lsp.server": "go=gopls,odin=ols,python=pylsp",
     "lsp.tabcompletion": true,
     "mkparents": true,
+    "pluginrepos": [
+        "https://raw.githubusercontent.com/MuratovAS/micro-fzfinder/main/repo.json"
+    ],
     "quoter.enable": true,
     "rmtrailingws": true,
-    "statusformatr": "$(percentage)%, $(bind:ToggleKeyMenu): bindings, $(bind:ToggleHelp): help",
+    "saveundo": true,
+    "statusformatr": "$(percentage)%, $(bind:ToggleKeyMenu): bindings https://github.com/zyedidia/micro/blob/master/runtime/help/defaultkeys.md, $(bind:ToggleHelp): help",
     "tabmovement": true,
     "tabstospaces": true
 }

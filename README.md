@@ -41,6 +41,7 @@ $ sudo visudo
 Defaults    env_keep += "MICRO_CONFIG_HOME"
 ```
 #### Plugins
+- fzfinder
 - lsp
 - quoter
 - wc
