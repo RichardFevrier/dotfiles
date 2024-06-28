@@ -144,10 +144,10 @@ alias rmf="rm -Rf"
 if status is-interactive
     fish_config theme choose Bogster
 
-    if type -q neofetch
-        function fish_greeting
-            # neofetch
-        end
+    function fish_greeting
+        # if type -q neofetch
+        #     neofetch
+        # end
     end
 
     if type -q starship
