@@ -1,4 +1,5 @@
 format = "$all$line_break$shlvl$shell$character"
+add_newline = false
 
 [character]
 error_symbol = "[\\$](bold #fb467b)"
