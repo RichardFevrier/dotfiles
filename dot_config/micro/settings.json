@@ -1,4 +1,7 @@
 {
+    "*.kdl": {
+        "commenttype": "// %s"
+    },
     "*.odin": {
         "commenttype": "// %s"
     },
