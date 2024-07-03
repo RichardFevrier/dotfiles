@@ -40,7 +40,10 @@ $ sudo visudo
 ```
 Defaults    env_keep += "MICRO_CONFIG_HOME"
 ```
-#### Plugins
+Plugins
+```
+$ micro -plugin install/update ...
+```
 - fzfinder
 - lsp
 - quoter
@@ -56,7 +59,7 @@ Defaults    env_keep += "MICRO_CONFIG_HOME"
 #### Tips
 To fix inverted keys e.g: `@/#` -> `</>`
 ##### Linux
-Create `$ /etc/udev/hwdb.d/60-keyboard-logitech-craft.hwdb` (use `evtest` to find the right keys)
+Create `/etc/udev/hwdb.d/60-keyboard-logitech-craft.hwdb` (use `evtest` to find the right keys)
 ```
 evdev:name:*Craft*:*
     KEYBOARD_KEY_70064=grave
