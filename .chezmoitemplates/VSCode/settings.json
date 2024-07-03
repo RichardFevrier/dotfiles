@@ -16,7 +16,7 @@
 	"terminal.explorerKind": "external",
 	"terminal.external.linuxExec": "wezterm",
 	"window.customTitleBarVisibility": "auto",
-	"window.menuBarVisibility": "toggle",
+	"window.menuBarVisibility": "compact",
 	"workbench.colorTheme": "Dobri Next -A00- Black",
 	"workbench.settings.applyToAllProfiles": [
 		"editor.formatOnSave"
