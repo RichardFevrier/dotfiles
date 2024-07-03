@@ -21,28 +21,28 @@ if test -d $HOME/.goenv
     goenv init - | source
     fish_add_path -ga $GOROOT/bin
     fish_add_path -ga $GOPATH/bin
-    alias goenv_update="cd ~/.goenv && git pull --recurse-submodules --jobs=10"
+    abbr -a goenv_update "cd ~/.goenv && git pull --recurse-submodules --jobs=10"
 end
 
 if test -d $HOME/.nodenv
     set -gx NODENV_ROOT $HOME/.nodenv
     fish_add_path -ga $NODENV_ROOT/bin
     nodenv init - | source
-    alias nodenv_update="cd ~/.nodenv/plugins/node-build && git pull --recurse-submodules --jobs=10"
+    abbr -a nodenv_update "cd ~/.nodenv/plugins/node-build && git pull --recurse-submodules --jobs=10"
 end
 
 if test -d $HOME/.pyenv
     set -gx PYENV_ROOT $HOME/.pyenv
     fish_add_path -ga $PYENV_ROOT/bin
     pyenv init - | source
-    alias pyenv_update="cd ~/.pyenv && git pull --recurse-submodules --jobs=10"
+    abbr -a pyenv_update "cd ~/.pyenv && git pull --recurse-submodules --jobs=10"
 end
 
 if test -d $HOME/.rbenv
     set -gx RBENV_ROOT $HOME/.rbenv
     fish_add_path -g $RBENV_ROOT/bin
     rbenv init - | source
-    alias rbenv_update="cd ~/.rbenv && git pull --recurse-submodules --jobs=10"
+    abbr -a rbenv_update "cd ~/.rbenv && git pull --recurse-submodules --jobs=10"
 end
 
 {{ if eq .chezmoi.os "darwin" -}}
@@ -60,6 +60,7 @@ if test -d /home/linuxbrew/.linuxbrew
     set -gx HOMEBREW_CELLAR $HOMEBREW_PREFIX/Cellar
     set -gx HOMEBREW_REPOSITORY $HOMEBREW_PREFIX/Homebrew
     fish_add_path -ga $HOMEBREW_PREFIX/bin $HOMEBREW_PREFIX/sbin
+    abbr -a brew_update "for i in (brew leaves); brew upgrade $i &>/dev/null; end"
 end
 
 if type -q fzf
@@ -76,68 +77,78 @@ if type -q micro
     set -gx MICRO_CONFIG_HOME /home/$(whoami)/.config/micro
     {{- end }}
 
-    alias mc=micro
+    abbr -a mc micro
 end
 
 
 
-alias cl=clear
+abbr -a cl clear
 
 {{ if eq .chezmoi.os "darwin" -}}
 if test -d "/Applications/VSCodium.app"
-    alias code="/Applications/VSCodium.app/Contents/Resources/app/bin/codium"
+    abbr -a code "/Applications/VSCodium.app/Contents/Resources/app/bin/codium"
 else if test -d "/Applications/Visual Studio Code.app"
-    alias code="/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code"
+    abbr -a code "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code"
 end
 {{- else if eq .chezmoi.os "linux" -}}
-if test -n "$(flatpak list --app --columns application | grep com.vscodium.codium)"
-    alias code="flatpak run com.vscodium.codium --ozone-platform=wayland"
-else if test -n "$(flatpak list --app --columns application | grep com.visualstudio.code)"
-    alias code="flatpak run com.visualstudio.code --ozone-platform=wayland"
+if type -q flatpak
+    if test -n "$(flatpak list --app --columns application | grep com.vscodium.codium)"
+        abbr -a code "flatpak run com.vscodium.codium --ozone-platform=wayland"
+    else if test -n "$(flatpak list --app --columns application | grep com.visualstudio.code)"
+        abbr -a code "flatpak run com.visualstudio.code --ozone-platform=wayland"
+    end
 end
 {{- end }}
 
-alias cz=chezmoi
+abbr -a cz chezmoi
 
 if type -q eza
-    alias lsa="eza -la"
+    abbr -a lsa "eza -la"
 else
-    alias lsa="ls -la"
+    abbr -a lsa "ls -la"
 end
 
 if type -q fzf
     if type -q bat
         if type -q micro
             {{ if eq .chezmoi.os "darwin" -}}
-            alias fz="fzf --preview 'bat --style=numbers --color=always {}' | xargs --max-args 1 micro"
+            abbr -a fz "fzf --preview 'bat --style=numbers --color=always {}' | xargs --max-args 1 micro"
             {{- else if eq .chezmoi.os "linux" -}}
-            alias fz="fzf --preview 'bat --style=numbers --color=always {}' | xargs --max-args 1 --no-run-if-empty micro"
+            abbr -a fz "fzf --preview 'bat --style=numbers --color=always {}' | xargs --max-args 1 --no-run-if-empty micro"
             {{- end }}
         else
             {{ if eq .chezmoi.os "darwin" -}}
-            alias fz="fzf --preview 'bat --style=numbers --color=always {}' | xargs --max-args 1 vi"
+            abbr -a fz "fzf --preview 'bat --style=numbers --color=always {}' | xargs --max-args 1 vi"
             {{- else if eq .chezmoi.os "linux" -}}
-            alias fz="fzf --preview 'bat --style=numbers --color=always {}' | xargs --max-args 1 --no-run-if-empty vi"
+            abbr -a fz "fzf --preview 'bat --style=numbers --color=always {}' | xargs --max-args 1 --no-run-if-empty vi"
             {{- end }}
         end
     else
         if type -q micro
             {{ if eq .chezmoi.os "darwin" -}}
-            alias fz="fzf | xargs --max-args 1 micro"
+            abbr -a fz "fzf | xargs --max-args 1 micro"
             {{- else if eq .chezmoi.os "linux" -}}
-            alias fz="fzf | xargs --max-args 1 --no-run-if-empty micro"
+            abbr -a fz "fzf | xargs --max-args 1 --no-run-if-empty micro"
             {{- end }}
         else
             {{ if eq .chezmoi.os "darwin" -}}
-            alias fz="fzf | xargs --max-args 1 vi"
+            abbr -a fz "fzf | xargs --max-args 1 vi"
             {{- else if eq .chezmoi.os "linux" -}}
-            alias fz="fzf | xargs --max-args 1 --no-run-if-empty vi"
+            abbr -a fz "fzf | xargs --max-args 1 --no-run-if-empty vi"
             {{- end }}
         end
     end
 end
 
-alias rmf="rm -Rf"
+if type -q odin
+    abbr -a odin_update "cd $(dirname $(realpath $(which odin))) && git pull --recurse-submodules --jobs=10 && make"
+end
+
+if type -q ols
+    abbr -a ols_update "cd $(dirname $(realpath $(which ols))) && git pull --recurse-submodules --jobs=10"
+end
+
+abbr -a rmf "rm -Rf"
 
 
 
