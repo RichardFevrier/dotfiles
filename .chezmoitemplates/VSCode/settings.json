@@ -3,7 +3,7 @@
 		"editor.insertSpaces": false,
 		"editor.formatOnSave": false
 	},
-    "editor.fontFamily": "'Fira Code'",
+    "editor.fontFamily": "'FiraCode Nerd Font'",
     "editor.fontLigatures": "'cv02', 'cv29', 'ss01', 'ss03', 'ss05'",
     "editor.fontSize": 14.5,
     {{ if eq .chezmoi.os "darwin" -}}

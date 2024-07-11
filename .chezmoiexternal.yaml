@@ -6,11 +6,9 @@
 {{- end }}
 "{{ $fontDir }}/Fira_Code":
   type: archive
-  url: "https://github.com/tonsky/FiraCode/releases/download/6.2/Fira_Code_v6.2.zip"
+  url: "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraCode.zip"
   include: ["**/*.ttf"]
-  stripComponents: 1
 "{{ $fontDir }}/Meslo_LG":
   type: archive
-  url: "https://github.com/andreberg/Meslo-Font/raw/master/dist/v1.2.1/Meslo%20LG%20v1.2.1.zip"
+  url: "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Meslo.zip"
   include: ["**/*.ttf"]
-  stripComponents: 1
