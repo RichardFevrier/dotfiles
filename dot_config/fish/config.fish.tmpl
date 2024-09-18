@@ -60,7 +60,7 @@ if test -d /home/linuxbrew/.linuxbrew
     set -gx HOMEBREW_CELLAR $HOMEBREW_PREFIX/Cellar
     set -gx HOMEBREW_REPOSITORY $HOMEBREW_PREFIX/Homebrew
     fish_add_path -ga $HOMEBREW_PREFIX/bin $HOMEBREW_PREFIX/sbin
-    abbr -a brew_update "for i in (brew leaves); brew upgrade $i &>/dev/null; end"
+    abbr -a brew_update "for i in (brew leaves); brew upgrade \$i &>/dev/null; end"
 end
 
 if type -q fzf
