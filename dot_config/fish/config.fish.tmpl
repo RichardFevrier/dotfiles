@@ -40,7 +40,7 @@ end
 
 if test -d $HOME/.rbenv
     set -gx RBENV_ROOT $HOME/.rbenv
-    fish_add_path -g $RBENV_ROOT/bin
+    fish_add_path -ga $RBENV_ROOT/bin
     rbenv init - | source
     abbr -a rbenv_update "cd ~/.rbenv && git pull --recurse-submodules --jobs=10"
 end
