@@ -5,6 +5,9 @@
     "*.odin": {
         "commenttype": "// %s"
     },
+    "Makefile": {
+        "tabstospaces": false
+    },
     "colorscheme": "dobri_next_a00_black",
     "diffgutter": true,
     "ft:markdown": {
