@@ -112,29 +112,29 @@ if type -q fzf
     if type -q bat
         if type -q micro
             {{ if eq .chezmoi.os "darwin" -}}
-            abbr -a fz "fzf --preview 'bat --style=numbers --color=always {}' | xargs --max-args 1 micro"
+            abbr -a fz "fzf --layout=reverse --no-sort --bind 'space:toggle' --preview 'bat --style=numbers --color=always {}' --multi | xargs micro"
             {{- else if eq .chezmoi.os "linux" -}}
-            abbr -a fz "fzf --preview 'bat --style=numbers --color=always {}' | xargs --max-args 1 --no-run-if-empty micro"
+            abbr -a fz "fzf --layout=reverse --no-sort --bind 'space:toggle' --preview 'bat --style=numbers --color=always {}' --multi | xargs --no-run-if-empty micro"
             {{- end }}
         else
             {{ if eq .chezmoi.os "darwin" -}}
-            abbr -a fz "fzf --preview 'bat --style=numbers --color=always {}' | xargs --max-args 1 vi"
+            abbr -a fz "fzf --layout=reverse --no-sort --bind 'space:toggle' --preview 'bat --style=numbers --color=always {}' | xargs --max-args 1 vi"
             {{- else if eq .chezmoi.os "linux" -}}
-            abbr -a fz "fzf --preview 'bat --style=numbers --color=always {}' | xargs --max-args 1 --no-run-if-empty vi"
+            abbr -a fz "fzf --layout=reverse --no-sort --bind 'space:toggle' --preview 'bat --style=numbers --color=always {}' | xargs --max-args 1 --no-run-if-empty vi"
             {{- end }}
         end
     else
         if type -q micro
             {{ if eq .chezmoi.os "darwin" -}}
-            abbr -a fz "fzf | xargs --max-args 1 micro"
+            abbr -a fz "fzf --layout=reverse --no-sort --bind 'space:toggle' --preview 'cat {}' --multi | xargs micro"
             {{- else if eq .chezmoi.os "linux" -}}
-            abbr -a fz "fzf | xargs --max-args 1 --no-run-if-empty micro"
+            abbr -a fz "fzf --layout=reverse --no-sort --bind 'space:toggle' --preview 'cat {}' --multi | xargs --no-run-if-empty micro"
             {{- end }}
         else
             {{ if eq .chezmoi.os "darwin" -}}
-            abbr -a fz "fzf | xargs --max-args 1 vi"
+            abbr -a fz "fzf --layout=reverse --no-sort --bind 'space:toggle' --preview 'cat {}' | xargs --max-args 1 vi"
             {{- else if eq .chezmoi.os "linux" -}}
-            abbr -a fz "fzf | xargs --max-args 1 --no-run-if-empty vi"
+            abbr -a fz "fzf --layout=reverse --no-sort --bind 'space:toggle' --preview 'cat {}' | xargs --max-args 1 --no-run-if-empty vi"
             {{- end }}
         end
     end
@@ -149,6 +149,17 @@ if type -q ols
 end
 
 abbr -a rmf "rm -Rf"
+
+if type -q yazi
+    function y
+    	set tmp (mktemp -t "yazi-cwd.XXXXXX")
+    	yazi $argv --cwd-file="$tmp"
+    	if set cwd (command cat -- "$tmp"); and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
+    		builtin cd -- "$cwd"
+    	end
+    	rm -f -- "$tmp"
+    end
+end
 
 
 

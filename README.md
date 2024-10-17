@@ -1,6 +1,6 @@
 # Dotfiles
 ## Dotfiles Manager
-[Chezmoi](https://www.chezmoi.io/)
+[Chezmoi](https://www.chezmoi.io)
 ```
 $ chezmoi init --apply RichardFevrier
 ```
@@ -14,7 +14,7 @@ $ chezmoi update -v
 ## Terminal
 [Wezterm](https://wezfurlong.org/wezterm/index.html)
 ## Unix shell
-[Fish](https://fishshell.com/)
+[Fish](https://fishshell.com)
 #### Change default shell
 ##### Linux
 ```
@@ -25,13 +25,15 @@ $ sudo usermod --shell $(which fish) $(whoami)
 $ sudo dscl . -create /Users/$(whoami) UserShell $(which fish)
 ```
 ## Shell prompt
-[Starship](https://starship.rs/) (`Nerd Font` already provided by `Wezterm`)
+[Starship](https://starship.rs) (`Nerd Font` already provided by `Wezterm`)
+## File Manager
+[Yazi](https://yazi-rs.github.io)
 ## Fuzzy Finder
-[Fzf](https://github.com/junegunn/fzf)
+[Fzf](https://junegunn.github.io/fzf)
 #### Tips
 `Ctrl+R` to fuzzy the commands history
 ## Text Editor
-[Micro](https://micro-editor.github.io/)
+[Micro](https://micro-editor.github.io)
 
 Do the following if you see a different configuration when using `sudo micro ...` (usually means that `$HOME` env var is different between `root` and `non-root` users):
 ```
@@ -48,14 +50,15 @@ $ micro -plugin install/update ...
 - lsp
 - quoter
 - wc
+- yazi
 ## Cat replacement
 [Bat](https://github.com/sharkdp/bat)
 ## Find replacement
 [Fd](https://github.com/sharkdp/fd)
 ## Ls replacement
-[Eza](https://github.com/eza-community/eza)
+[Eza](https://eza.rocks)
 ## Keyboard layout
-[Qwerty-Lafayette](https://github.com/fabi1cazenave/qwerty-lafayette) (files included for linux and macOS)
+[Qwerty-Lafayette](https://qwerty-lafayette.org) (files included for linux and macOS)
 #### Tips
 To fix inverted keys e.g: `@/#` -> `</>`
 ##### Linux

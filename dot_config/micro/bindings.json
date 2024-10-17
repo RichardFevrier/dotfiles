@@ -7,5 +7,5 @@
     "CtrlSpace": "command:lspcompletion",
     "CtrlUnderscore": "lua:comment.comment",
     "F5": "lua:wc.wordCount",
-    "Alt-Tab": "command:fzfinder"
+    "Alt-Tab": "command:yazi"
 }

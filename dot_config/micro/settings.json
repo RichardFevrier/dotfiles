@@ -13,7 +13,8 @@
     "ft:markdown": {
         "rmtrailingws": false
     },
-    "fzfarg": "--preview 'bat --style=numbers --color=always {}'",
+    "fzfarg": "--layout=reverse --no-sort --bind 'space:toggle' --preview 'bat --style=numbers --color=always {}' --multi",
+    "fzfopen": "newtab",
     "hlsearch": true,
     "indentchar": "|",
     "lsp.autocompleteDetails": true,
@@ -23,7 +24,8 @@
     "lsp.tabcompletion": true,
     "mkparents": true,
     "pluginrepos": [
-        "https://raw.githubusercontent.com/MuratovAS/micro-fzfinder/main/repo.json"
+        "https://raw.githubusercontent.com/MuratovAS/micro-fzfinder/main/repo.json",
+        "https://raw.githubusercontent.com/RichardFevrier/micro-yazi/main/repo.json"
     ],
     "quoter.enable": true,
     "rmtrailingws": true,
