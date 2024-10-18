@@ -49,6 +49,7 @@ $ micro -plugin install/update ...
 - fzfinder
 - lsp
 - quoter
+- urlopen
 - wc
 - yazi
 ## Cat replacement

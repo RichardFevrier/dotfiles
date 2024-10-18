@@ -25,6 +25,7 @@
     "mkparents": true,
     "pluginrepos": [
         "https://raw.githubusercontent.com/MuratovAS/micro-fzfinder/main/repo.json",
+        "https://raw.githubusercontent.com/pjg11/micro-urlopen/main/repo.json",
         "https://raw.githubusercontent.com/RichardFevrier/micro-yazi/main/repo.json"
     ],
     "quoter.enable": true,
