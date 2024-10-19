@@ -1,5 +1,9 @@
 YAY = n
+{{ if eq .chezmoi.os "linux" -}}
 FLATPAK = y
+{{- else -}}
+FLATPAK = n
+{{- end }}
 SNAP = n
 APPIMAGE = n
 BREW = y

@@ -140,6 +140,10 @@ if type -q fzf
     end
 end
 
+if type -q lazygit
+    abbr -a g "lazygit"
+end
+
 if type -q odin
     abbr -a odin_update "cd $(dirname $(realpath $(which odin))) && git pull --recurse-submodules --jobs=10 && make"
 end

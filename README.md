@@ -7,8 +7,14 @@ $ chezmoi init --apply RichardFevrier
 ```
 $ chezmoi update -v
 ```
-## Desktop Environment (Linux)
-[Niri](https://github.com/YaLTeR/niri)
+## App manager
+[App](https://hkdb.github.io/app)
+```
+$ app -m brew install ...
+```
+```
+$ app -r brew
+```
 ## Font
 [Fira Code](https://github.com/tonsky/FiraCode)  (files included for linux and macOS)
 ## Terminal
@@ -28,10 +34,6 @@ $ sudo dscl . -create /Users/$(whoami) UserShell $(which fish)
 [Starship](https://starship.rs) (`Nerd Font` already provided by `Wezterm`)
 ## File Manager
 [Yazi](https://yazi-rs.github.io)
-## Fuzzy Finder
-[Fzf](https://junegunn.github.io/fzf)
-#### Tips
-`Ctrl+R` to fuzzy the commands history
 ## Text Editor
 [Micro](https://micro-editor.github.io)
 
@@ -52,10 +54,16 @@ $ micro -plugin install/update ...
 - urlopen
 - wc
 - yazi
+## Git Manager
+[Lazygit](https://github.com/jesseduffield/lazygit)
 ## Cat replacement
 [Bat](https://github.com/sharkdp/bat)
 ## Find replacement
 [Fd](https://github.com/sharkdp/fd)
+## Fuzzy Finder
+[Fzf](https://junegunn.github.io/fzf)
+#### Tips
+`Ctrl+R` to fuzzy the commands history
 ## Ls replacement
 [Eza](https://eza.rocks)
 ## Keyboard layout
@@ -72,3 +80,5 @@ evdev:name:*Craft*:*
 Then `$ sudo systemd-hwdb update` and `$ sudo udevadm trigger`  
 ##### macOS
 Use [Karabiner-Elements](https://karabiner-elements.pqrs.org/) (config included)
+## Desktop Environment (Linux)
+[Niri](https://github.com/YaLTeR/niri)
