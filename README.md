@@ -34,6 +34,11 @@ $ sudo dscl . -create /Users/$(whoami) UserShell $(which fish)
 [Starship](https://starship.rs) (`Nerd Font` already provided by `Wezterm`)
 ## File Manager
 [Yazi](https://yazi-rs.github.io)
+```
+ya pack -a/u ...
+```
+- yazi-rs/plugins:max-preview
+- KKV9/compress
 ## Text Editor
 [Micro](https://micro-editor.github.io)
 
