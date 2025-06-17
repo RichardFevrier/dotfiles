@@ -1,0 +1,19 @@
+{{ if eq .chezmoi.os "darwin" -}}
+{{ if eq .chezmoi.arch "amd64" -}}
+if test -d /usr/local
+    set -gx HOMEBREW_PREFIX /usr/local
+{{- else -}}
+if test -d /opt/homebrew
+    set -gx HOMEBREW_PREFIX /opt/homebrew
+{{- end }}
+{{- else if eq .chezmoi.os "linux" -}}
+if test -d /home/linuxbrew/.linuxbrew
+    set -gx HOMEBREW_PREFIX /home/linuxbrew/.linuxbrew
+{{- end }}
+    set -gx HOMEBREW_CELLAR $HOMEBREW_PREFIX/Cellar
+    set -gx HOMEBREW_REPOSITORY $HOMEBREW_PREFIX/Homebrew
+    fish_add_path -ga $HOMEBREW_PREFIX/bin $HOMEBREW_PREFIX/sbin
+    if status is-interactive
+        abbr -a brew_update "set --local brew_outdated_output (brew outdated); echo \"brew will upgrade:\"; for i in (brew leaves); if string match -r \$i \$brew_outdated_output; end; end; for i in (brew leaves); if string match -r \$i \$brew_outdated_output; brew upgrade \$i; end; end; brew cleanup; rm -Rf ~/.cache/Homebrew/downloads/*"
+    end
+end

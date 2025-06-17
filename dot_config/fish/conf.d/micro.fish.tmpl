@@ -1,0 +1,13 @@
+if type -q micro
+    set -gx EDITOR micro
+    set -gx MICRO_TRUECOLOR 1
+    # set MICRO_CONFIG_HOME to be able to use Micro with sudo without passing param like '--preserve-env=HOME' if sudo $HOME points to /root or something else...
+    {{ if eq .chezmoi.os "darwin" -}}
+    set -gx MICRO_CONFIG_HOME /Users/$(whoami)/.config/micro
+    {{- else if eq .chezmoi.os "linux" -}}
+    set -gx MICRO_CONFIG_HOME /home/$(whoami)/.config/micro
+    {{- end }}
+    if status is-interactive
+        abbr -a mc micro
+    end
+end
