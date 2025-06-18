@@ -1,0 +1,36 @@
+{
+    "layer": "top",
+    "height": 30,
+    // "modules-left": ["niri/window"],
+    "modules-center": ["clock"],
+    "modules-right": ["mpris", "privacy", "wireplumber"], //"wlr/taskbar", "tray",
+    "clock": {
+        "format": "{:%a %b %d  %H:%M}",
+        "tooltip": false
+    },
+    "niri/window": {
+    	"format": "{title}      -        {app_id}"
+    },
+    "wireplumber": {
+        "format": "{volume}% ",
+        "format-muted": "",
+        "format-off": "", // not working see: https://github.com/Alexays/Waybar/issues/3672
+        "tooltip": false,
+        "states": {
+            "off": 0
+        },
+    },
+    // "wireplumber.off": { // not working see: https://github.com/Alexays/Waybar/issues/3672
+    //     "format": "",
+    // },
+    "wlr/taskbar": {
+        "all-outputs": true
+    },
+    "mpris": {
+        "format": "{title} - {artist}",
+        "on-click": "",
+        "on-click-middle": "",
+        "on-click-right": "",
+        "tooltip": false
+    }
+}

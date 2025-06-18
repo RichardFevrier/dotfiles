@@ -85,5 +85,8 @@ evdev:name:*Craft*:*
 Then `$ sudo systemd-hwdb update` and `$ sudo udevadm trigger`  
 ##### macOS
 Use [Karabiner-Elements](https://karabiner-elements.pqrs.org/) (config included)
-## Desktop Environment (Linux)
+# Linux
+## Desktop Environment
 [Niri](https://github.com/YaLTeR/niri)
+## Status bar
+[Waybar](https://github.com/Alexays/Waybar)

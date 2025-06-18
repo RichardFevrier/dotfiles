@@ -1,0 +1,16 @@
+window#waybar {
+    background-color: rgba(48,48,48,255);
+    color: #ffffff;
+}
+
+* {
+    font-family: "FiraCode Nerd Font";
+    font-size: 15px;
+    font-weight: bold;
+    /* filter: grayscale(100%); */
+    margin-top: -50px; margin-bottom: -50px; /* fix jumpings see: https://github.com/Alexays/Waybar/issues/2026#issuecomment-1780717766 */
+}
+
+#wireplumber {
+    padding: 0 24px;
+}
