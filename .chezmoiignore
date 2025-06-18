@@ -11,6 +11,8 @@ README.md
 {{- if ne .chezmoi.os "linux" }}
 **/.var/
 **/.var/**/*
+**/waybar/
+**/waybar/**/*
 **/xkb/
 **/xkb/**/*
 {{- end }}
