@@ -96,3 +96,5 @@ Use [Karabiner-Elements](https://karabiner-elements.pqrs.org/) (config included)
 [Niri](https://github.com/YaLTeR/niri)
 ## Status bar
 [Waybar](https://github.com/Alexays/Waybar)
+## Wallpaper displayer
+[Hyprpaper](https://wiki.hypr.land/Hypr-Ecosystem/hyprpaper/)

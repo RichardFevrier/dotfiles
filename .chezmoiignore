@@ -13,6 +13,8 @@ README.md
 **/.var/**
 **/environment.d/
 **/environment.d/**
+**/hypr/
+**/hypr/**
 **/waybar/
 **/waybar/**
 **/xkb/
