@@ -11,6 +11,7 @@ README.md
 {{- if ne .chezmoi.os "linux" }}
 **/.var/
 **/.var/**
+**/app/packages/flatpak.json
 **/environment.d/
 **/environment.d/**
 **/hypr/

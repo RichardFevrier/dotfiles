@@ -1,3 +1,0 @@
-{
-	"packages": "bat bottom chezmoi distrobox eza fd ffmpegthumbnailer fish fzf git-delta git-lfs glow hyperfine lazygit libvirt macchina micro mpv p7zip podman-compose pre-commit qemu rnr starship streamlink vivid watchman yazi"
-}
