@@ -1,0 +1,6 @@
+activation_mode:
+    disabled: true
+builtins:
+    applications:
+        actions:
+            enabled: false

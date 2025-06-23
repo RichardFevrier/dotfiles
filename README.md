@@ -98,3 +98,5 @@ Use [Karabiner-Elements](https://karabiner-elements.pqrs.org/) (config included)
 [Waybar](https://github.com/Alexays/Waybar)
 ## Wallpaper displayer
 [Hyprpaper](https://wiki.hypr.land/Hypr-Ecosystem/hyprpaper/)
+## App launcher
+[Walker](https://github.com/abenz1267/walker)
