@@ -1,16 +1,16 @@
-local wezterm = require 'wezterm'
+local wezterm = require "wezterm"
 
 local config = {}
 
 if wezterm.config_builder then
-  config = wezterm.config_builder()
+    config = wezterm.config_builder()
 end
 
-config.color_scheme = 'dobri_next_a00_black'
+config.color_scheme = "dobri_next_a00_black"
 config.font = wezterm.font {
-  family = 'FiraCode Nerd Font',
-  harfbuzz_features = { 'cv02', 'cv29', 'ss01', 'ss03', 'ss05' },
-  weight = 400,
+    family = "FiraCode Nerd Font",
+    harfbuzz_features = { "cv02", "cv29", "ss01", "ss03", "ss05" },
+    weight = 400
 }
 {{ if eq .chezmoi.os "darwin" -}}
 config.font_size = 14.5
@@ -19,12 +19,83 @@ config.font_size = 10.5
 config.freetype_load_target = "Light"
 {{- end }}
 config.line_height = 1.22
-config.front_end = 'WebGpu'
+config.front_end = "WebGpu"
 config.enable_scroll_bar = true
+config.mouse_wheel_scrolls_tabs = false
 config.scrollback_lines = 100000
+config.warn_about_missing_glyphs = false
 {{ if eq .chezmoi.os "linux" -}}
-config.window_decorations="RESIZE"
+config.window_decorations = "NONE"
 {{- end }}
 config.check_for_updates = false
+
+config.disable_default_key_bindings = true
+config.keys = {
+    {
+        key = "q",
+        mods = "ALT",
+        action = wezterm.action.CloseCurrentTab {confirm = true}
+    },
+    {
+        key = "o",
+        mods = "ALT",
+        action = wezterm.action.SpawnTab "CurrentPaneDomain"
+    },
+    {
+        key = "n",
+        mods = "ALT",
+        action = wezterm.action.SpawnTab "CurrentPaneDomain"
+    },
+    {
+        key = "t",
+        mods = "ALT",
+        action = wezterm.action.SpawnTab "CurrentPaneDomain"
+    },
+    {
+        key = "PageUp",
+        mods = "ALT",
+        action = wezterm.action.ActivateTabRelative(-1)
+    },
+    {
+        key = "PageDown",
+        mods = "ALT",
+        action = wezterm.action.ActivateTabRelative(1)
+    },
+    {
+        key = "PageUp",
+        mods = "ALT|SHIFT",
+        action = wezterm.action.MoveTabRelative(-1)
+    },
+    {
+        key = "PageDown",
+        mods = "ALT|SHIFT",
+        action = wezterm.action.MoveTabRelative(1)
+    },
+    {
+        key = "f",
+        mods = "ALT",
+        action = wezterm.action.Search("CurrentSelectionOrEmptyString")
+    },
+    {
+        key = "P",
+        mods = "ALT|SHIFT",
+        action = wezterm.action.ActivateCommandPalette,
+    },
+    -- {
+    --     key = 'C',
+    --     mods = 'CTRL',
+    --     action = wezterm.action.CopyTo 'ClipboardAndPrimarySelection',
+    -- },
+    -- {
+    --     key = 'V',
+    --     mods = 'CTRL',
+    --     action = wezterm.action.PasteFrom 'Clipboard'
+    -- },
+    -- {
+    --     key = 'V',
+    --     mods = 'CTRL',
+    --     action = wezterm.action.PasteFrom 'PrimarySelection'
+    -- },
+}
 
 return config
