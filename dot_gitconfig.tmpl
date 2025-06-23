@@ -1,0 +1,22 @@
+[core]
+    pager = delta
+[delta]
+    line-numbers = true
+    navigate = true
+[diff]
+	colorMoved = default
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[gui]
+[init]
+    defaultBranch = main
+[interactive]
+    diffFilter = delta --color-only
+[merge]
+	conflictstyle = diff3
+[user]
+    name = {{ .name }}
+    email = {{ .email }}
