@@ -3,23 +3,23 @@ README.md
 
 {{- if ne .chezmoi.os "darwin" }}
 **/karabiner/
-**/karabiner/**/*
+**/karabiner/**
 **/Library/
-**/Library/**/*
+**/Library/**
 {{- end }}
 
 {{- if ne .chezmoi.os "linux" }}
 **/.var/
-**/.var/**/*
+**/.var/**
 **/environment.d/
 **/environment.d/**
 **/waybar/
-**/waybar/**/*
+**/waybar/**
 **/xkb/
-**/xkb/**/*
+**/xkb/**
 {{- end }}
 
 {{- if ne .chezmoi.os "windows" }}
 **/AppData/
-**/AppData/**/*
+**/AppData/**
 {{- end }}
