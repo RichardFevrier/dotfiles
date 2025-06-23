@@ -253,7 +253,7 @@ if type -q fzf
         end
 
         if set -ql _flag_yazi
-            echo "$paths" > "$_flag_yazi"
+            echo -e "$paths"
             return
         end
 

@@ -41,10 +41,12 @@ $ sudo dscl . -create /Users/$(whoami) UserShell $(which fish)
 ## File Manager
 [Yazi](https://yazi-rs.github.io)
 ```
-ya pack -a/u ...
+ya pkg ...
 ```
-- yazi-rs/plugins:max-preview
 - KKV9/compress
+- Lil-Dank/lazygit
+- Rolv-Apneseth/starship
+- yazi-rs/plugins:toggle-pane
 ## Text Editor
 [Micro](https://micro-editor.github.io)
 

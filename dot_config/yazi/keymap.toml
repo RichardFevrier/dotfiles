@@ -1,35 +1,42 @@
-[manager]
+[mgr]
 keymap = [
-    { on = "<C-q>",     run = "quit",                       desc = "Quit the process" },
-    { on = "<Esc>",     run = "escape",                     desc = "Exit visual mode, clear selected, or cancel search" },
+    { on = "<C-q>",     run = "quit",                               desc = "Quit the process" },
+    { on = "<Esc>",     run = "escape",                             desc = "Exit visual mode, clear selected, or cancel search" },
 
-	{ on = "<Up>",      run = "arrow -1",                   desc = "Move cursor up" },
-	{ on = "<Down>",    run = "arrow 1",                    desc = "Move cursor down" },
-	{ on = "<Left>",    run = "leave",                      desc = "Go back to the parent directory" },
-	{ on = "<Right>",   run = "enter",                      desc = "Enter the child directory" },
+	{ on = "<Up>",      run = "arrow -1",                           desc = "Move cursor up" },
+	{ on = "<Down>",    run = "arrow 1",                            desc = "Move cursor down" },
+	{ on = "<Left>",    run = "leave",                              desc = "Go back to the parent directory" },
+	{ on = "<Right>",   run = "plugin smart-enter",                 desc = "Enter the child directory" },
 
-	{ on = "<C-Space>", run = "select",                     desc = "Toggle the current selection state" }, # soon renamed to toggle
-	{ on = "<C-a>",     run = "select_all --state=true",    desc = "Select all files" },
-	{ on = "<S-a>",     run = "select_all",                 desc = "Select all files" },
-	{ on = "<S-Up>",    run = ["select", "arrow -1"],       desc = "Toggle the current selection state then Move cursor up" },
-	{ on = "<S-Down>",  run = ["select", "arrow 1"],        desc = "Toggle the current selection state then Move cursor down" },
+	# { on = "<C-Space>", run = "select",                             desc = "Toggle the current selection state" }, # soon renamed to toggle
+	{ on = "<C-a>",     run = "toggle_all --state=true",            desc = "Select all files" },
+	# { on = "<S-a>",     run = "select_all",                         desc = "Select all files" },
+	{ on = "<S-Up>",    run = ["toggle", "arrow -1"],               desc = "Toggle the current selection state then Move cursor up" },
+	{ on = "<S-Down>",  run = ["toggle", "arrow 1"],                desc = "Toggle the current selection state then Move cursor down" },
 
-    { on = "<Space>",   run = "plugin --sync max-preview",  desc = "Maximize or restore preview" },
-	{ on = "<Enter>",   run = "open",                       desc = "Open selected files" },
-	{ on = "<C-Enter>", run = "open --interactive",         desc = "Open selected files interactively" },
+    { on = "<Space>",   run = "plugin toggle-pane max-preview",     desc = "Maximize or restore preview" },
+	{ on = "<Enter>",   run = "plugin smart-enter",                 desc = "Open selected files" },
+	{ on = "<S-Enter>", run = "open --interactive",                 desc = "Open selected files interactively" },
 
-    { on = "<C-x>",     run = "yank --cut",                 desc = "Yank selected files (cut)" },
-    # { on = "<C-S-x>",   run = "unyank",             desc = "Cancel the yank status" },
-	{ on = "<C-c>",     run = "yank",                       desc = "Yank selected files (copy)" },
-    # { on = "<C-C>",     run = "unyank",             desc = "Cancel the yank status" },
-	# { on = "<C-S-c>",   run = "unyank",             desc = "Cancel the yank status" },
-    { on = "<C-v>",     run = "paste",                      desc = "Paste yanked files" },
-	# { on = "<C-V>",     run = "paste --force",      desc = "Paste yanked files (overwrite if the destination exists)" },
-	{ on = "<Delete>",  run = "remove",                     desc = "Trash selected files" },
-	{ on = "<C-n>",     run = 'create',                     desc = "Create a file or directory. Ends with / (Unix) or \\ (Windows) for directories." },
-	{ on = "<C-k>",     run = 'plugin compress',            desc = "Archive selected files" },
+    { on = "<C-x>",     run = "yank --cut",                         desc = "Yank selected files (cut)" },
+    # { on = "<C-S-x>",   run = "unyank",                             desc = "Cancel the yank status" },
+	{ on = "<C-c>",     run = "yank",                               desc = "Yank selected files (copy)" },
+    # { on = "<C-C>",     run = "unyank",                             desc = "Cancel the yank status" },
+	# { on = "<C-S-c>",   run = "unyank",                             desc = "Cancel the yank status" },
+    { on = "<C-v>",     run = "paste",                              desc = "Paste yanked files" },
+	# { on = "<C-V>",     run = "paste --force",                      desc = "Paste yanked files (overwrite if the destination exists)" },
+	{ on = "<Delete>",  run = "remove",                             desc = "Trash selected files" },
+	{ on = "<C-n>",     run = 'create',                             desc = "Create a file or directory. Ends with / (Unix) or \\ (Windows) for directories." },
+	{ on = "<C-r>",     run = "rename --cursor=before_ext",         desc = "Rename selected file(s)" },
+	{ on = "<C-k>",     run = 'plugin compress',                    desc = "Archive selected files" },
 
-	{ on = "<C-f>",     run = "filter --smart",             desc = "Search files by name via fd" },
+	{ on = "<C-f>",     run = "filter --smart",                     desc = "Search files by name via fd" },
+	{ on = "<S-f>",     run = "plugin custom-fzf",                  desc = "Search files by name via fzf" },
+
+	{ on = "<C-h>",     run = "cd ~/",                              desc = "Open home folder" },
+
+	# { on = "<C-d>",     run = "plugin delta",                       desc = "Compare selected files" },
+	{ on = "<C-g>",     run = "plugin lazygit",                     desc = "Run lazygit" },
 ]
 
 # [input]
