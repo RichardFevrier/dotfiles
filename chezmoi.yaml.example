@@ -1,0 +1,8 @@
+data:
+  # Git
+  name: Richard Février
+  email: richard@fevrier.io
+  # Niri
+  screenshots: ~/Pictures/Screenshots # can't use $XDG_PICTURES_DIR see: https://github.com/YaLTeR/niri/issues/1842
+  # Hyprpaper
+  wallpaper: $XDG_PICTURES_DIR/Wallpapers/3440x1440_1.png
