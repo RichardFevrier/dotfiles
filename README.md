@@ -62,12 +62,10 @@ Plugins
 ```
 $ micro -plugin install/update ...
 ```
-- fzfinder
 - lsp
 - quoter
 - urlopen
 - wc
-- yazi
 ## Git Manager
 [Lazygit](https://github.com/jesseduffield/lazygit)
 ## Cat replacement

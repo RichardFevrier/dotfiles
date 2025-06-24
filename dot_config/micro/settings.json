@@ -1,32 +1,36 @@
 {
+    "colorscheme": "dobri_next_a00_black",
+    "diffgutter": true,
     "*.kdl": {
         "commenttype": "// %s"
     },
-    "*.odin": {
-        "commenttype": "// %s"
-    },
-    "Makefile": {
+    "ft:makefile": {
         "tabstospaces": false
     },
-    "colorscheme": "dobri_next_a00_black",
-    "diffgutter": true,
     "ft:markdown": {
-        "rmtrailingws": false
+        "rmtrailingws": false,
+        "tabsize": 2
+    },
+    "ft:odin": {
+        "commenttype": "// %s"
     },
     "fzfarg": "--layout=reverse --no-sort --bind 'space:toggle' --preview 'bat --style=numbers --color=always {}' --multi",
     "fzfopen": "newtab",
     "hlsearch": true,
     "indentchar": "|",
     "lsp.autocompleteDetails": true,
+    "lsp.formatOnSave": true,
     "lsp.ignoreMessages": "LS message1 to ignore|LS message 2 to ignore|...",
     "lsp.ignoreTriggerCharacters": "completion,signature",
     "lsp.server": "go=gopls,odin=ols,python=pylsp",
     "lsp.tabcompletion": true,
     "mkparents": true,
+    "parsecursor": true,
     "pluginrepos": [
-        "https://raw.githubusercontent.com/MuratovAS/micro-fzfinder/main/repo.json",
+        "https://raw.githubusercontent.com/AndCake/micro-plugin-lsp/master/repo.json",
         "https://raw.githubusercontent.com/pjg11/micro-urlopen/main/repo.json",
-        "https://raw.githubusercontent.com/RichardFevrier/micro-yazi/main/repo.json"
+        // "https://raw.githubusercontent.com/RichardFevrier/micro-yazi/main/repo.json",
+        "https://raw.githubusercontent.com/sparques/micro-quoter/master/repo.json"
     ],
     "quoter.enable": true,
     "rmtrailingws": true,

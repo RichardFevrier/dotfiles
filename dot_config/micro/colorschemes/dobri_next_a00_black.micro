@@ -34,5 +34,5 @@ color-link indent-char "#18222d"
 color-link scrollbar "#18222d"
 color-link statusline "#5c6370"
 
-color-link cursor-line "#14344b"
-color-link selection ",#18222d"
+color-link cursor-line "#554600"
+color-link selection ",#554600"
