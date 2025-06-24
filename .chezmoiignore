@@ -17,6 +17,10 @@ README.md
 **/environment.d/**
 **/hypr/
 **/hypr/**
+**/niri/
+**/niri/**
+**/systemd/
+**/systemd/**
 **/walker/
 **/walker/**
 **/waybar/

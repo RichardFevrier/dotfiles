@@ -99,5 +99,9 @@ Use [Karabiner-Elements](https://karabiner-elements.pqrs.org/) (config included)
 [Waybar](https://github.com/Alexays/Waybar)
 ## Wallpaper displayer
 [Hyprpaper](https://wiki.hypr.land/Hypr-Ecosystem/hyprpaper/)
+## Notifications manager
+[SwayNC](https://github.com/ErikReider/SwayNotificationCenter)
+## OSD
+[SwayOSD](https://github.com/ErikReider/SwayOSD)
 ## App launcher
 [Walker](https://github.com/abenz1267/walker)
