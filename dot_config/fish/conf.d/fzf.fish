@@ -7,9 +7,9 @@ if type -q fzf
 
         # set --local final_output ""
 
-        set --local fd_output "$(fd --follow --hidden --ignore-file ~/.ignore --full-path --color never --regex -- $query)"
+        set --local fd_output "$(fd --follow --hidden --ignore-file ~/.ignore --absolute-path --color never --regex -- $query)"
         if test $binary = false
-            set fd_output "$(echo -e $fd_output | xargs -d "\n" file --mime-type | grep text | sed 's/:\s*\S*$//g')"
+            set fd_output "$(echo -e $fd_output | xargs -d "\n" file --mime-type | grep -E 'text|json' | sed 's/:\s*\S*$//g')"
         end
 
         set --local final_output $fd_output
