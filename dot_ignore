@@ -16,6 +16,7 @@ go
 .local
 *.mbox
 .mozilla
+.nix*
 node_modules
 .nodenv
 .npm
