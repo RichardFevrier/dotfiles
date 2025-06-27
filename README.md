@@ -2,12 +2,6 @@
 First things first use the `chezmoi.yaml.example` to setup your `~/.config/chezmoi/chezmoi.yaml`
 ## Dotfiles Manager
 [Chezmoi](https://www.chezmoi.io)
-Create a file at `~/.config/chezmoi/chezmoi.yaml` and put:
-```
-data:
-  email: # your email used for git
-  name: # your name used for git
-```
 ```
 $ chezmoi init --apply RichardFevrier
 ```
