@@ -8,14 +8,6 @@ $ chezmoi init --apply RichardFevrier
 ```
 $ chezmoi update -v
 ```
-## App manager
-[App](https://hkdb.github.io/app)
-```
-$ app -m brew install ...
-```
-```
-$ app -r brew
-```
 ## Font
 [Fira Code](https://github.com/tonsky/FiraCode)  (files included for linux and macOS)
 ## Terminal
