@@ -30,6 +30,9 @@ disabled = false
 format = '$symbol '
 symbol = '❯'
 repeat = true
+{{ if eq .chezmoi.os "linux" -}}
+repeat_offset = 1
+{{- end }}
 
 [sudo]
 disabled = false
