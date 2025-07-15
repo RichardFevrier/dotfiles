@@ -21,6 +21,10 @@ input {
     }
 }
 
+cursor {
+    xcursor-theme "macOS" // https://github.com/ful1e5/apple_cursor
+}
+
 layout {
     focus-ring {
         width 4
@@ -42,7 +46,7 @@ layout {
     }
 
     default-column-width {
-        // proportion 0.5
+        proportion 0.5
     }
 
     gaps 16
@@ -72,10 +76,10 @@ window-rule {
     // default-floating-position x=0 y=0 relative-to="top-left"
 }
 
-window-rule {
-    match app-id="^org.wezfurlong.wezterm$"
-    default-column-width { proportion 0.7; } // https://github.com/wez/wezterm/issues/4708
-}
+// window-rule {
+//     match app-id="^org.wezfurlong.wezterm$"
+//     default-column-width { proportion 0.5; } // https://github.com/wez/wezterm/issues/4708
+// }
 
 window-rule {
     match app-id="^dev.zed.Zed$"
@@ -137,6 +141,15 @@ binds {
     Mod+Shift+End           { spawn "systemctl" "poweroff"; }
 }
 
+environment {
+    DISPLAY ":0"
+}
+
+spawn-at-startup "xwayland-satellite"
+spawn-at-startup "waybar"
+spawn-at-startup "hyprpaper"
+spawn-at-startup "swaync"
+spawn-at-startup "swayosd-server"
 spawn-at-startup "walker --gapplication-service"
 spawn-at-startup "flatpak" "run" "org.mozilla.firefox"
 
