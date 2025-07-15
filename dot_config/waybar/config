@@ -3,9 +3,16 @@
     "height": 30,
     // "modules-left": ["niri/window"],
     "modules-center": ["clock"],
-    "modules-right": ["mpris", "privacy", "wireplumber"], //"wlr/taskbar", "tray",
+    "modules-right": ["tray", "mpris", "privacy", "wireplumber"], //"wlr/taskbar", "tray",
     "clock": {
         "format": "{:%a %b %d  %H:%M}",
+        "tooltip": false
+    },
+    "mpris": {
+        "format": "{title} - {artist}",
+        "on-click": "",
+        "on-click-middle": "",
+        "on-click-right": "",
         "tooltip": false
     },
     "niri/window": {
@@ -25,12 +32,5 @@
     // },
     "wlr/taskbar": {
         "all-outputs": true
-    },
-    "mpris": {
-        "format": "{title} - {artist}",
-        "on-click": "",
-        "on-click-middle": "",
-        "on-click-right": "",
-        "tooltip": false
     }
 }
