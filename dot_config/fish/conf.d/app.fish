@@ -1,5 +1,5 @@
 if status is-interactive
-    if type -q app
+    if command -q app
         function app_brew_diff
             app_diff ~/.config/app/packages/brew.json "brew leaves"
         end

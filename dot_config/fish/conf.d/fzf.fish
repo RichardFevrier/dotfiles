@@ -1,4 +1,4 @@
-if type -q fzf
+if command -q fzf
 
     function __fzf_default_command
 

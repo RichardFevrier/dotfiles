@@ -1,5 +1,5 @@
 if status is-interactive
-    if type -q lazygit
+    if command -q lazygit
         abbr -a g lazygit
     end
 end

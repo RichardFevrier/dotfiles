@@ -1,5 +1,5 @@
 if status is-interactive
-    if type -q starship
+    if command -q starship
         starship init fish | source
     end
 end

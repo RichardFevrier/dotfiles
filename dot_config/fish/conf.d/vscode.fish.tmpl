@@ -6,7 +6,7 @@ if status is-interactive
         abbr -a code "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code"
     end
     {{- else if eq .chezmoi.os "linux" -}}
-    if type -q flatpak
+    if command -q flatpak
         if test -n "$(flatpak list --app --columns application | grep com.vscodium.codium)"
             abbr -a code "flatpak run com.vscodium.codium --ozone-platform=wayland"
         else if test -n "$(flatpak list --app --columns application | grep com.visualstudio.code)"

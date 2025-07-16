@@ -1,5 +1,5 @@
 if status is-interactive
-    if type -q chezmoi
+    if command -q chezmoi
         abbr -a cz chezmoi
     end
 end
