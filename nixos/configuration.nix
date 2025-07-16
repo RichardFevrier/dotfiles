@@ -126,6 +126,7 @@ in
       micro
       mpv
       nautilus
+      nix-your-shell
       podman-compose
       pre-commit
       psst
