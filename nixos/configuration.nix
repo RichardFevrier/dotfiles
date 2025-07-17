@@ -5,7 +5,7 @@ let
   app.fotema.Fotema
   codes.loers.Karlender
   com.dropbox.Client
-  com.github.maoschanz.drawing
+  com.github.PintaProject.Pinta
   com.github.tchx84.Flatseal
   info.febvre.Komikku
   io.github.alainm23.planify
@@ -79,15 +79,27 @@ in
     };
   };
 
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-old";
+  nix = {
+    gc = {
+      automatic = true;
+      dates = "Sun 00:00";
+      persistent = true;
+      options = "--delete-old";
+    };
+    optimise = {
+      automatic = true;
+      dates = "Mon 00:00";
+      persistent = true;
+    };
   };
 
   networking = {
-    hostName = "watt-the-hell";
     networkmanager.enable = true;
+    hostName = "watt-the-hell";
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [ 32400 ]; # plex
+    };
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -132,7 +144,9 @@ in
       psst
       qemu
       resources
+      ripgrep
       rnr
+      squirreldisk
       starship
       swaynotificationcenter
       swayosd
