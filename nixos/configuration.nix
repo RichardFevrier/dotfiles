@@ -5,7 +5,7 @@ let
   app.fotema.Fotema
   codes.loers.Karlender
   com.dropbox.Client
-  com.github.maoschanz.drawing
+  com.github.PintaProject.Pinta
   com.github.tchx84.Flatseal
   info.febvre.Komikku
   io.github.alainm23.planify
