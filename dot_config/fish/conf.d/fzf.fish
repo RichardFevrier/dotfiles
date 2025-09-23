@@ -15,11 +15,13 @@ if command -q fzf
         set --local final_output $fd_output
 
         if test -n "$query"
-            set --local rg_options
-            set rg_options --no-binary
-            set rg_options $rg_options --context=0 --max-columns=240 -- "$query"
-
-            set --local rg_output "$(rg --follow --hidden --no-heading --line-number --column --no-messages --color never $rg_options)"
+            set --local rg_glob_option
+            while read -l line
+                if test -n "$line"
+                    set rg_glob_option $rg_glob_option --glob \'!$line\'
+                end
+            end < ~/.ignore
+            set --local rg_output "$(rg $rg_glob_option --no-binary --follow --hidden --no-heading --line-number --column --no-messages --color never --context=0 --max-columns=240 -- $query)"
             set rg_output "$(echo $rg_output | sed /WARNING/d)"
             set rg_output "$(string replace --all '\n' '' $rg_output | string replace --all '\r' '')"
 
