@@ -32,5 +32,6 @@
     "Ctrl-r": "command:references",
     "F5": "lua:wc.wordCount",
     "F6": "command:vsplit",
-    "F7": "command:hsplit"
+    "F7": "command:hsplit",
+    "Insert": "None"
 }
