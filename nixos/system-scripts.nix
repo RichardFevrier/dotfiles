@@ -16,17 +16,17 @@ let
       fi
     done <<< "''$desired"
 
-    while IFS= read -r line; do
-      origin=''$(echo "''$line" | ${pkgs.gawk}/bin/awk '{print ''$3}')
-      if [[ ! "''$origin" == "flathub" ]]; then
-        continue
-      fi
-      app=''$(echo "''$line" | ${pkgs.gawk}/bin/awk '{print ''$1}')
-      if [[ ! "''$desired" == *"''$app"* ]]; then
-        ref=''$(echo "''$line" | ${pkgs.gawk}/bin/awk '{print ''$2}')
-        ${pkgs.flatpak}/bin/flatpak uninstall --system --noninteractive --delete-data "''$ref"
-      fi
-    done <<< "''$installed"
+    # while IFS= read -r line; do
+    #   origin=''$(echo "''$line" | ${pkgs.gawk}/bin/awk '{print ''$3}')
+    #   if [[ ! "''$origin" == "flathub" ]]; then
+    #     continue
+    #   fi
+    #   app=''$(echo "''$line" | ${pkgs.gawk}/bin/awk '{print ''$1}')
+    #   if [[ ! "''$desired" == *"''$app"* ]]; then
+    #     ref=''$(echo "''$line" | ${pkgs.gawk}/bin/awk '{print ''$2}')
+    #     ${pkgs.flatpak}/bin/flatpak uninstall --system --noninteractive --delete-data "''$ref"
+    #   fi
+    # done <<< "''$installed"
   '';
 
   flatpakInitPost = pkgs.writeShellScript "flatpak-init-post" ''

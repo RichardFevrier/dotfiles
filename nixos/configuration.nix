@@ -58,6 +58,7 @@ in
     autoUpgrade = {
       enable = true;
       dates = "Sat 00:00";
+      flags = ["--upgrade-all"];
       persistent = true;
     };
   };
@@ -128,6 +129,7 @@ in
       fzf
       git
       git-lfs
+      gnome-disk-utility
       gnome-software
       hyperfine
       hyprpaper
@@ -146,7 +148,6 @@ in
       resources
       ripgrep
       rnr
-      squirreldisk
       starship
       swaynotificationcenter
       swayosd
