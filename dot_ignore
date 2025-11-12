@@ -5,6 +5,7 @@ cache
 .cargo
 .codon
 .config
+.containers
 .dartServer
 .dropbox
 flash-attention
@@ -25,6 +26,7 @@ node_modules
 .pyenv
 .rbenv
 .rustup
+.Trash*
 .var
 .venv
 .vim*
