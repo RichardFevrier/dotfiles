@@ -7,6 +7,8 @@ cache
 .config
 .containers
 .dartServer
+.devenv
+.direnv
 .dropbox
 flash-attention
 .flipper

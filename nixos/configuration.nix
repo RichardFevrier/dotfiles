@@ -92,6 +92,7 @@ in
       dates = "Mon 00:00";
       persistent = true;
     };
+    settings.trusted-users = [ "root" "${username}" ];
   };
 
   networking = {
@@ -121,6 +122,7 @@ in
       chafa
       chezmoi
       delta
+      devenv
       distrobox
       eza
       fd
@@ -162,6 +164,11 @@ in
       yazi
       zellij
     ];
+  };
+
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
   };
 
   security.rtkit.enable = true;
