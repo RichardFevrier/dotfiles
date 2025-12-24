@@ -1,6 +1,5 @@
 data:
-  # Git
-  name: Richard Février
+  fullname: Richard Février
   email: richard@fevrier.io
 
 diff:

@@ -1,5 +1,5 @@
 # Dotfiles
-First things first use the `chezmoi.yaml.example` to setup your `~/.config/chezmoi/chezmoi.yaml`
+First things first use the `dot_config/chezmoi/chezmoi.yaml` to setup your `~/.config/chezmoi/chezmoi.yaml`
 ## Dotfiles Manager
 [Chezmoi](https://www.chezmoi.io)
 ```

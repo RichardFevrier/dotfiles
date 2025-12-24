@@ -6,7 +6,7 @@ let
     set -euo pipefail
 
     ${pkgs.coreutils}/bin/mkdir -p ~/.config/chezmoi
-    ${pkgs.curl}/bin/curl -L https://raw.githubusercontent.com/${github}/dotfiles/main/chezmoi.yaml.example -o ~/.config/chezmoi/chezmoi.yaml
+    ${pkgs.curl}/bin/curl -L https://raw.githubusercontent.com/${github}/dotfiles/main/dot_config/chezmoi/chezmoi.yaml -o ~/.config/chezmoi/chezmoi.yaml
     ${pkgs.chezmoi}/bin/chezmoi init --apply ${github} && ${pkgs.chezmoi}/bin/chezmoi update
     PATH=${pkgs.git}/bin:$PATH ${pkgs.yazi}/bin/ya pkg install
     ${pkgs.micro}/bin/micro -plugin install lsp quoter urlopen wc
