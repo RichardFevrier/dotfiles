@@ -2,8 +2,6 @@ data:
   # Git
   name: Richard Février
   email: richard@fevrier.io
-  # Niri
-  screenshots: ~/Pictures/Screenshots # can't use $XDG_PICTURES_DIR see: https://github.com/YaLTeR/niri/issues/1842
 
 diff:
   exclude:
