@@ -7,6 +7,7 @@ let
   com.dropbox.Client
   com.github.PintaProject.Pinta
   com.github.tchx84.Flatseal
+  com.github.wwmm.easyeffects
   info.febvre.Komikku
   io.github.alainm23.planify
   it.mijorus.smile
@@ -92,7 +93,10 @@ in
       dates = "Mon 00:00";
       persistent = true;
     };
-    settings.trusted-users = [ "root" "${username}" ];
+    settings = {
+      experimental-features = [ "nix-command" "flakes" ];
+      trusted-users = [ "root" "${username}" ];
+    };
   };
 
   networking = {
@@ -118,6 +122,7 @@ in
       adwaita-icon-theme
       apple-cursor
       bat
+      bazaar
       bottom
       chafa
       chezmoi
@@ -132,7 +137,6 @@ in
       git
       git-lfs
       gnome-disk-utility
-      gnome-software
       hyperfine
       hyprpaper
       jq
@@ -142,7 +146,6 @@ in
       micro
       mpv
       nautilus
-      nix-your-shell
       podman-compose
       pre-commit
       psst
