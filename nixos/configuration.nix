@@ -132,24 +132,21 @@ in
       eza
       fd
       ffmpegthumbnailer
-      file
       fzf
       git
       git-lfs
       gnome-disk-utility
-      hyperfine
       hyprpaper
-      jq
       lazygit
-      libqalculate
+      libqalculate # walker dependency
       macchina
       micro
       mpv
       nautilus
       podman-compose
-      pre-commit
       psst
       qemu
+      rclone
       resources
       ripgrep
       rnr
@@ -174,7 +171,7 @@ in
     nix-direnv.enable = true;
   };
 
-  security.rtkit.enable = true;
+  security.rtkit.enable = true; # Pipewire realtime priority
 
   services = {
     # desktopManager.gnome.enable = true;
