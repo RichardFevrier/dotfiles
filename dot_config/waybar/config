@@ -21,15 +21,8 @@
     "wireplumber": {
         "format": "{volume}% ",
         "format-muted": "",
-        "format-off": "", // not working see: https://github.com/Alexays/Waybar/issues/3672
         "tooltip": false,
-        "states": {
-            "off": 0
-        },
     },
-    // "wireplumber.off": { // not working see: https://github.com/Alexays/Waybar/issues/3672
-    //     "format": "",
-    // },
     "wlr/taskbar": {
         "all-outputs": true
     }
