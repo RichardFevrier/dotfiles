@@ -90,7 +90,7 @@ binds {
     Mod+T                   { spawn "wezterm"; }
     Mod+W                   { spawn "flatpak" "run" "org.mozilla.firefox"; }
 
-    Mod+Space               { spawn "walker" "--modules" "applications,calc"; }
+    Mod+Space               { spawn "walker"; }
 
     XF86AudioRaiseVolume    { spawn "swayosd-client" "--output-volume" "raise"; }
     XF86AudioLowerVolume    { spawn "swayosd-client" "--output-volume" "lower"; }
@@ -150,6 +150,7 @@ spawn-at-startup "waybar"
 spawn-at-startup "hyprpaper"
 spawn-at-startup "swaync"
 spawn-at-startup "swayosd-server"
+spawn-at-startup "elephant"
 spawn-at-startup "walker --gapplication-service"
 spawn-at-startup "flatpak" "run" "com.github.wwmm.easyeffects"
 spawn-at-startup "flatpak" "run" "org.mozilla.firefox"

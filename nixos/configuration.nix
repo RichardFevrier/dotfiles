@@ -129,6 +129,7 @@ in
       delta
       devenv
       distrobox
+      elephant # walker dependency
       eza
       fd
       ffmpegthumbnailer
@@ -138,7 +139,6 @@ in
       gnome-disk-utility
       hyprpaper
       lazygit
-      libqalculate # walker dependency
       macchina
       micro
       mpv
