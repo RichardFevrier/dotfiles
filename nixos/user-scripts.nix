@@ -9,7 +9,9 @@ let
     ${pkgs.curl}/bin/curl -L https://raw.githubusercontent.com/${github}/dotfiles/main/dot_config/chezmoi/chezmoi.yaml -o ~/.config/chezmoi/chezmoi.yaml
     ${pkgs.chezmoi}/bin/chezmoi init --apply ${github} && ${pkgs.chezmoi}/bin/chezmoi update
     PATH=${pkgs.git}/bin:$PATH ${pkgs.yazi}/bin/ya pkg install
-    ${pkgs.micro}/bin/micro -plugin install lsp quoter urlopen wc
+    if [ -f ~/.config/micro/plug/list.txt ]; then
+      ${pkgs.coreutils}/bin/cat ~/.config/micro/plug/list.txt | ${pkgs.findutils}/bin/xargs ${pkgs.micro}/bin/micro -plugin install
+    fi
   '';
 
   userInitPost = pkgs.writeShellScript "${username}-init-post" ''
