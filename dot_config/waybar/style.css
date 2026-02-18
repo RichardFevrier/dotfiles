@@ -1,16 +1,17 @@
 window#waybar {
-    background-color: rgba(48,48,48,255);
-    color: #ffffff;
+  color: #ffffff;
+  background-color: rgba(48, 48, 48, 255);
+  border-bottom: 3px solid rgba(0, 0, 0, 0.5);
 }
 
 * {
-    font-family: "FiraCode Nerd Font";
-    font-size: 15px;
-    font-weight: bold;
-    /* filter: grayscale(100%); */
-    margin-top: -50px; margin-bottom: -50px; /* fix jumpings see: https://github.com/Alexays/Waybar/issues/2026#issuecomment-1780717766 */
+  margin-top: -50px; /* fix jumpings see: https://github.com/Alexays/Waybar/issues/2026#issuecomment-1780717766 */
+  margin-bottom: -50px; /* fix jumpings see: https://github.com/Alexays/Waybar/issues/2026#issuecomment-1780717766 */
+  font-family: "FiraCode Nerd Font";
+  font-size: 15px;
+  font-weight: bold; /* fix jumpings see: https://github.com/Alexays/Waybar/issues/2026#issuecomment-1780717766 */
 }
 
 #wireplumber {
-    padding: 0 24px;
+  padding: 0 24px;
 }
