@@ -61,6 +61,7 @@ in
       dates = "Sat 00:00";
       flags = ["--upgrade-all"];
       persistent = true;
+      randomizedDelaySec = "30min";
     };
   };
 
@@ -87,11 +88,13 @@ in
       dates = "Sun 00:00";
       persistent = true;
       options = "--delete-older-than 14d";
+      randomizedDelaySec = "30min";
     };
     optimise = {
       automatic = true;
       dates = "Mon 00:00";
       persistent = true;
+      randomizedDelaySec = "30min";
     };
     settings = {
       experimental-features = [ "nix-command" "flakes" ];
