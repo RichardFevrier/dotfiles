@@ -33,11 +33,22 @@ in
 
   boot = {
     loader = {
-      systemd-boot = {
+      grub = {
         enable = true;
         configurationLimit = 5;
+        efiSupport = true;
+        device = "nodev";
+        # on windows use: bcdedit /set "{bootmgr}" path \EFI\NIXOS-BOOT\GRUBX64.EFI
+        extraEntries = ''
+          menuentry "Windows 11" {
+            insmod part_gpt
+            insmod fat
+            insmod chain
+            search --no-floppy --fs-uuid --set=root A27E-D58C
+            chainloader /EFI/Microsoft/Boot/bootmgfw.efi
+          }
+        '';
       };
-      efi.canTouchEfiVariables = true;
     };
     kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [ "amd_pstate=active" ];
@@ -46,7 +57,7 @@ in
   fileSystems."/mnt/data" =
   { device = "/dev/disk/by-uuid/0b8080ed-91bb-4528-981d-b1c973581621";
     fsType = "ext4";
-    options = [ "defaults" ];
+    options = [ "defaults" "nofail" ];
   };
 
   hardware = {
