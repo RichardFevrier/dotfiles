@@ -28,7 +28,6 @@ in
   imports =
     [
       ./hardware-configuration.nix
-      <home-manager/nixos>
     ];
 
   boot = {
@@ -40,7 +39,7 @@ in
         device = "nodev";
         # on windows use: bcdedit /set "{bootmgr}" path \EFI\NIXOS-BOOT\GRUBX64.EFI
         extraEntries = ''
-          menuentry "Windows 11" {
+          menuentry "Windows 11" --class windows {
             insmod part_gpt
             insmod fat
             insmod chain
@@ -49,6 +48,13 @@ in
           }
         '';
       };
+      grub2-theme = {
+        enable = true;
+        theme = "stylish";
+        icon = "color";
+        screen = "ultrawide2k";
+      };
+      timeout = 10;
     };
     kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [ "amd_pstate=active" ];
