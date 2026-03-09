@@ -225,7 +225,6 @@ in
       xdg-desktop-portal-wlr
       # xdg-desktop-portal-gtk
       # xdg-desktop-portal-gnome
-      gnome-keyring
     ];
   };
 
@@ -251,10 +250,19 @@ in
     };
   };
 
-  home-manager.users."${username}" = { pkgs, ... }: {
+  home-manager.users."${username}" = { pkgs, lib, ... }: {
     home.stateVersion = "25.05";
 
     systemd.user.services."${username}-init" = userScripts.userInitService;
+
+    home.activation.maskGcrSshAgent = lib.hm.dag.entryAfter ["writeBoundary"] ''
+      $DRY_RUN_CMD systemctl --user mask gcr-ssh-agent.service gcr-ssh-agent.socket 2>/dev/null || true
+    '';
+
+    programs.keychain = {
+      enable = true;
+      keys = [ "id_ed25519_${username}" ];
+    };
 
     dconf = {
       settings = {
