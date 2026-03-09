@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 let
   flatpaks=''
@@ -14,8 +14,8 @@ let
   org.cryptomator.Cryptomator
   org.gnome.Loupe
   org.libreoffice.LibreOffice
-  org.mozilla.Thunderbird
   org.mozilla.firefox
+  org.mozilla.Thunderbird
   org.pipewire.Helvum
   '';
   systemScripts = import ./system-scripts.nix { inherit pkgs flatpaks; };
@@ -71,14 +71,26 @@ in
     enableAllFirmware = true;
   };
 
-  system = {
-    stateVersion = "25.05";
-    autoUpgrade = {
+  networking = {
+    hostName = "watt-the-hell";
+    nameservers = [
+      "94.140.14.14" # AdGuard
+      "94.140.15.15" # AdGuard
+      "9.9.9.9"      # Quad9
+    ];
+    networkmanager = {
       enable = true;
-      dates = "Sat 00:00";
-      flags = ["--upgrade-all"];
-      persistent = true;
-      randomizedDelaySec = "30min";
+      dns = "systemd-resolved";
+      settings."global-dns-domain-*" = {
+        servers = "94.140.14.14,94.140.15.15,9.9.9.9";
+        options = "";
+      };
+    };
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [
+        32400 # plex
+      ];
     };
   };
 
@@ -119,16 +131,19 @@ in
     };
   };
 
-  networking = {
-    networkmanager.enable = true;
-    hostName = "watt-the-hell";
-    firewall = {
+  nixpkgs.config.allowUnfree = true;
+
+  system = {
+    stateVersion = "25.05";
+    autoUpgrade = {
       enable = true;
-      allowedTCPPorts = [ 32400 ]; # plex
+      persistent = true;
+      dates = "Sat 00:00";
+      randomizedDelaySec = "30min";
+      flake = inputs.self.outPath;
+      flags = [ "--update-input" "nixpkgs" ];
     };
   };
-
-  nixpkgs.config.allowUnfree = true;
 
   environment = {
     etc."xdg/mimeapps.list".text = ''
@@ -137,6 +152,7 @@ in
       x-scheme-handler/https=org.mozilla.firefox.desktop
       image/jpeg=org.gnome.Loupe.desktop
       image/png=org.gnome.Loupe.desktop
+      video/mp4=mpv.desktop
     '';
     systemPackages = with pkgs; [
       adwaita-icon-theme
@@ -149,20 +165,28 @@ in
       delta
       devenv
       distrobox
-      elephant # walker dependency
+      elephant                   # walker dependency
       eza
       fd
       ffmpegthumbnailer
       fzf
+      gexiv2                     # nautilus-media-columns dependency
       git
       git-lfs
       gnome-disk-utility
+      gst_all_1.gstreamer        # nautilus-media-columns dependency
+      gst_all_1.gst-plugins-base # nautilus-media-columns dependency
+      gst_all_1.gst-plugins-good # nautilus-media-columns dependency
+      gst_all_1.gst-plugins-bad  # nautilus-media-columns dependency
+      gst_all_1.gst-libav        # nautilus-media-columns dependency
       hyprpaper
+      jq
       lazygit
       macchina
       micro
       mpv
       nautilus
+      nautilus-python            # nautilus-media-columns dependency
       podman-compose
       psst
       qemu
@@ -184,37 +208,42 @@ in
       yazi
       zellij
     ];
+    sessionVariables = {
+      NAUTILUS_4_EXTENSION_DIR = "/run/current-system/sw/lib/nautilus/extensions-4"; # nautilus-media-columns dependency
+      GST_PLUGIN_SYSTEM_PATH_1_0 = "/run/current-system/sw/lib/gstreamer-1.0";       # nautilus-media-columns dependency
+    };
   };
 
-  programs.direnv = {
-    enable = true;
-    nix-direnv.enable = true;
+  programs = {
+    direnv = {
+      enable = true;
+    };
+    fish.enable = true;
+    niri.enable = true;
   };
-
-  security.rtkit.enable = true; # Pipewire realtime priority
 
   services = {
-    # desktopManager.gnome.enable = true;
-    # displayManager.gdm.enable = true;
     displayManager.ly.enable = true;
     flatpak.enable = true;
     gnome.sushi.enable = true;
     gvfs.enable = true;
-    pipewire = {
-      enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      jack.enable = true;
-      pulse.enable = true;
-      wireplumber.enable = true;
-    };
+    pipewire.enable = true;
     playerctld.enable = true;
-    # printing.enable = true;
+
+    resolved = {
+      enable = true;
+      settings.Resolve = {
+        DNSOverTLS = "opportunistic";
+        FallbackDNS = "";
+      };
+    };
+
     xserver.xkb = {
       layout = "us";
-      variant = "";
     };
   };
+
+  security.rtkit.enable = true; # Pipewire realtime priority
 
   virtualisation.podman.enable = true;
 
@@ -223,15 +252,39 @@ in
     extraPortals = with pkgs; [
       # xdg-desktop-portal-termfilepickers < wait for merged
       xdg-desktop-portal-wlr
-      # xdg-desktop-portal-gtk
-      # xdg-desktop-portal-gnome
     ];
   };
 
-  programs.fish.enable = true;
-  users.defaultUserShell = pkgs.fish;
+  users = {
+    defaultUserShell = pkgs.fish;
+    users."${username}" = {
+      isNormalUser = true;
+      description = "${username}";
+      extraGroups = [ "networkmanager" "wheel" ];
+    };
+  };
 
-  programs.niri.enable = true;
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
+  home-manager.backupFileExtension = "bak";
+  home-manager.users."${username}" = { pkgs, lib, ... }: {
+
+    home = {
+      stateVersion = "25.05";
+
+      # mask gcr-ssh-agent.service & gcr-ssh-agent.socket started by gvfs
+      activation.maskGcrSshAgent = lib.hm.dag.entryAfter ["writeBoundary"] ''
+        $DRY_RUN_CMD systemctl --user mask gcr-ssh-agent.service gcr-ssh-agent.socket 2>/dev/null || true
+      '';
+    };
+
+    programs.keychain = {
+      enable = true;
+      keys = [ "id_ed25519_${username}" ];
+    };
+
+    systemd.user.services."${username}-init" = userScripts.userInitService;
+  };
 
   systemd.services.flatpak-init = systemScripts.flatpakInitService;
   systemd.services.flatpak-update = systemScripts.flatpakUpdateService;
@@ -240,36 +293,4 @@ in
   systemd.timers.micro-update = systemScripts.microUpdateTimer;
   systemd.services.yazi-update = systemScripts.yaziUpdateService;
   systemd.timers.yazi-update = systemScripts.yaziUpdateTimer;
-
-  users = {
-    users."${username}" = {
-      isNormalUser = true;
-      description = "${username}";
-      extraGroups = [ "networkmanager" "wheel" ];
-      packages = with pkgs; [];
-    };
-  };
-
-  home-manager.users."${username}" = { pkgs, lib, ... }: {
-    home.stateVersion = "25.05";
-
-    systemd.user.services."${username}-init" = userScripts.userInitService;
-
-    home.activation.maskGcrSshAgent = lib.hm.dag.entryAfter ["writeBoundary"] ''
-      $DRY_RUN_CMD systemctl --user mask gcr-ssh-agent.service gcr-ssh-agent.socket 2>/dev/null || true
-    '';
-
-    programs.keychain = {
-      enable = true;
-      keys = [ "id_ed25519_${username}" ];
-    };
-
-    dconf = {
-      settings = {
-        "org/gnome/desktop/interface" = {
-  	      color-scheme = "prefer-dark";
-        };
-      };
-    };
-  };
 }
