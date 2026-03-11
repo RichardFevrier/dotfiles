@@ -1,4 +1,4 @@
-{ pkgs, username, github }:
+{ pkgs, lib, username, github, ssh_auth_socks_flatpaks }:
 
 let
   userInit = pkgs.writeShellScript "${username}-init" ''
@@ -38,6 +38,38 @@ let
       WantedBy = [ "default.target" ];
     };
   };
+
+  bitwardenSetupService = {
+    Unit = {
+      Description = "Run Bitwarden setup";
+    };
+    Service = {
+      Type = "oneshot";
+      ExecStart = pkgs.writeShellScript "bitwarden-setup" ''
+        #!/usr/bin/env bash
+        set -euo pipefail
+
+        BITWARDEN_PATH="/home/${username}/.var/app/com.bitwarden.desktop"
+
+        DATA="$BITWARDEN_PATH/config/Bitwarden/data.json"
+        content=$(${pkgs.jq}/bin/jq '
+          .["global_desktopSettings_trayEnabled"] = true |
+          .["global_desktopSettings_closeToTray"] = true |
+          .["global_desktopSettings_startToTray"] = true |
+          .["global_desktopSettings_openAtLogin"] = true |
+          .["global_desktopSettings_sshAgentEnabled"] = true
+        ' "$DATA")
+        echo "$content" > "$DATA"
+
+        for item in ${lib.concatStringsSep " " ssh_auth_socks_flatpaks}; do
+            ${pkgs.flatpak}/bin/flatpak override --user $item --env=SSH_AUTH_SOCK="$BITWARDEN_PATH/data/.bitwarden-ssh-agent.sock"
+        done
+      '';
+    };
+    Install = {
+      WantedBy = [ "default.target" ];
+    };
+  };
 in {
-  inherit userInitService;
+  inherit userInitService bitwardenSetupService;
 }

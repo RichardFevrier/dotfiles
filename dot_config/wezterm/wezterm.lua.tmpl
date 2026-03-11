@@ -26,6 +26,7 @@ config.scrollback_lines = 100000
 config.warn_about_missing_glyphs = false
 {{ if eq .chezmoi.os "linux" -}}
 config.window_decorations = "NONE"
+config.mux_enable_ssh_agent = false
 {{- end }}
 config.check_for_updates = false
 

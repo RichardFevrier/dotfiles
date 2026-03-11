@@ -4,10 +4,12 @@ let
   flatpaks=''
   app.fotema.Fotema
   codes.loers.Karlender
+  com.bitwarden.desktop
   com.dropbox.Client
   com.github.PintaProject.Pinta
   com.github.tchx84.Flatseal
   com.github.wwmm.easyeffects
+  com.vscodium.codium
   info.febvre.Komikku
   io.github.alainm23.planify
   it.mijorus.smile
@@ -19,10 +21,6 @@ let
   org.pipewire.Helvum
   '';
   systemScripts = import ./system-scripts.nix { inherit pkgs flatpaks; };
-
-  username="richard";
-  github="RichardFevrier"; # chezmoi config
-  userScripts = import ./user-scripts.nix { inherit pkgs username github; };
 in
 {
   imports =
@@ -127,7 +125,7 @@ in
     };
     settings = {
       experimental-features = [ "nix-command" "flakes" ];
-      trusted-users = [ "root" "${username}" ];
+      trusted-users = [ "root" "richard" ];
     };
   };
 
@@ -257,9 +255,9 @@ in
 
   users = {
     defaultUserShell = pkgs.fish;
-    users."${username}" = {
+    users."richard" = {
       isNormalUser = true;
-      description = "${username}";
+      description = "richard";
       extraGroups = [ "networkmanager" "wheel" ];
     };
   };
@@ -267,8 +265,17 @@ in
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.backupFileExtension = "bak";
-  home-manager.users."${username}" = { pkgs, lib, ... }: {
+  home-manager.users."richard" = { pkgs, lib, config, ... }:
 
+  let
+    username = config.home.username;
+    github="RichardFevrier"; # chezmoi config
+    ssh_auth_socks_flatpaks = [
+      "com.vscodium.codium"
+    ];
+    userScripts = import ./user-scripts.nix { inherit pkgs lib username github ssh_auth_socks_flatpaks; };
+  in
+  {
     home = {
       stateVersion = "25.05";
 
@@ -278,12 +285,14 @@ in
       '';
     };
 
-    programs.keychain = {
-      enable = true;
-      keys = [ "id_ed25519_${username}" ];
-    };
+    systemd.user = {
+      sessionVariables = {
+        SSH_AUTH_SOCK = "/home/${username}/.var/app/com.bitwarden.desktop/data/.bitwarden-ssh-agent.sock";
+      };
 
-    systemd.user.services."${username}-init" = userScripts.userInitService;
+      services."${username}-init" = userScripts.userInitService;
+      services.bitwarden-setup = userScripts.bitwardenSetupService;
+    };
   };
 
   systemd.services.flatpak-init = systemScripts.flatpakInitService;

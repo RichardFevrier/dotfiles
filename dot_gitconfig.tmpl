@@ -1,3 +1,5 @@
+[commit]
+    gpgsign = true
 [core]
     pager = delta
 [delta]
@@ -10,6 +12,8 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[gpg]
+    format = ssh
 [gui]
 [init]
     defaultBranch = main
@@ -18,5 +22,6 @@
 [merge]
 	conflictstyle = diff3
 [user]
+    signingkey = {{ .public_key }}
     name = {{ .fullname }}
     email = {{ .email }}

@@ -1,4 +1,5 @@
 data:
+  public_key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICkF6iT5e5+pggUqy+sjxoVO/4z0Mz2Awzld8OI8wyIW
   fullname: Richard Février
   email: richard@fevrier.io
 
