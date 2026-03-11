@@ -146,7 +146,7 @@ environment {
 }
 
 spawn-at-startup "xwayland-satellite"
-spawn-at-startup "waybar"
+spawn-at-startup "ironbar"
 spawn-at-startup "hyprpaper"
 spawn-at-startup "swaync"
 spawn-at-startup "swayosd-server"

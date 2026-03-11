@@ -82,7 +82,7 @@ Use [Karabiner-Elements](https://karabiner-elements.pqrs.org/) (config included)
 ## Desktop Environment
 [Niri](https://github.com/YaLTeR/niri)
 ## Status bar
-[Waybar](https://github.com/Alexays/Waybar)
+[Ironbar](https://github.com/JakeStanger/ironbar)
 ## Wallpaper displayer
 [Hyprpaper](https://wiki.hypr.land/Hypr-Ecosystem/hyprpaper/)
 ## Notifications manager

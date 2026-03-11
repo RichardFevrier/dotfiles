@@ -1,0 +1,28 @@
+.background {
+  background-color: #303030;
+  font-family: "FiraCode Nerd Font";
+  font-size: 15px;
+  font-weight: bold;
+  border-bottom: 3px solid #00000080;
+}
+
+.widget {
+  color: #ffffff;
+  border: none;
+}
+
+.widget:hover {
+  color: #ffffff;
+}
+
+button {
+  background: transparent;
+}
+
+.tray .item {
+  border: none;
+}
+
+.tray button:hover {
+  background: #00000030;
+}

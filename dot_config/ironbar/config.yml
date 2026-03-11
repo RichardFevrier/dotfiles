@@ -1,0 +1,29 @@
+position: top
+height: 30
+anchor_to_edges: true
+
+center:
+  - type: clock
+    format: "%a %b %d  %H:%M"
+    disable_popup: true
+
+end:
+  - type: music
+    player_type: mpris
+    format: "{title} - {artist}"
+    show_status_icon: false
+    marquee:
+      enable: true
+      max_length: 35
+      scroll_speed: 0.35
+      pause_duration: 0
+      on_hover: play
+    disable_popup: true
+
+  - type: tray
+
+  - type: volume
+    format: "{percentage}% {icon}"
+    on_scroll_up: "wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%+ --limit 1.0"
+    on_scroll_down: "wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-"
+    disable_popup: true

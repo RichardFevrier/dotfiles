@@ -19,14 +19,14 @@ README.md
 **/environment.d/**
 **/hypr/
 **/hypr/**
+**/ironbar/
+**/ironbar/**
 **/niri/
 **/niri/**
 **/systemd/
 **/systemd/**
 **/walker/
 **/walker/**
-**/waybar/
-**/waybar/**
 **/xkb/
 **/xkb/**
 {{- end }}

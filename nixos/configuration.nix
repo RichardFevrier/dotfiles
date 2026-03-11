@@ -178,6 +178,7 @@ in
       gst_all_1.gst-plugins-bad  # nautilus-media-columns dependency
       gst_all_1.gst-libav        # nautilus-media-columns dependency
       hyprpaper
+      inputs.ironbar.packages.${pkgs.system}.default
       jq
       lazygit
       macchina
@@ -199,7 +200,6 @@ in
       uutils-coreutils-noprefix
       vivid
       walker
-      waybar
       wezterm
       wl-clipboard-rs
       xwayland-satellite
