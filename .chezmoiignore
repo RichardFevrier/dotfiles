@@ -27,6 +27,8 @@ README.md
 **/systemd/**
 **/walker/
 **/walker/**
+**/wireplumber/
+**/wireplumber/**
 **/xkb/
 **/xkb/**
 {{- end }}
