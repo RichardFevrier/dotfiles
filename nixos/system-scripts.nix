@@ -40,7 +40,7 @@ let
   flatpakInitService = {
     unitConfig = {
       Description = "Run flatpak init";
-      ConditionPathExists = ''!/var/flatpak-init-hash-${builtins.hashString "sha256" (toString flatpakInit)}'';
+      ConditionPathExists = "!/var/flatpak-init-hash-${builtins.hashString "sha256" (toString flatpakInit)}";
       After = [ "network-online.target" ];
       Wants = [ "network-online.target" ];
     };
@@ -120,6 +120,15 @@ let
     };
     wantedBy = [ "timers.target" ];
   };
-in {
-  inherit flatpakInitService flatpakUpdateService flatpakUpdateTimer microUpdateService microUpdateTimer yaziUpdateService yaziUpdateTimer;
+in
+{
+  inherit
+    flatpakInitService
+    flatpakUpdateService
+    flatpakUpdateTimer
+    microUpdateService
+    microUpdateTimer
+    yaziUpdateService
+    yaziUpdateTimer
+    ;
 }

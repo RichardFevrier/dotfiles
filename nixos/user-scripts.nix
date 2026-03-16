@@ -1,4 +1,10 @@
-{ pkgs, lib, username, github, ssh_auth_socks_flatpaks }:
+{
+  pkgs,
+  lib,
+  username,
+  github,
+  ssh_auth_socks_flatpaks,
+}:
 
 let
   userInit = pkgs.writeShellScript "${username}-init" ''
@@ -25,7 +31,7 @@ let
   userInitService = {
     Unit = {
       Description = "Run ${username} init";
-      ConditionPathExists = ''!/home/${username}/.var/${username}-init-hash-${builtins.hashString "sha256" (toString userInit)}'';
+      ConditionPathExists = "!/home/${username}/.var/${username}-init-hash-${builtins.hashString "sha256" (toString userInit)}";
       After = [ "network-online.target" ];
       Wants = [ "network-online.target" ];
     };
@@ -70,6 +76,7 @@ let
       WantedBy = [ "default.target" ];
     };
   };
-in {
+in
+{
   inherit userInitService bitwardenSetupService;
 }

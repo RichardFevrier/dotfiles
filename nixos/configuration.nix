@@ -1,32 +1,36 @@
-{ config, pkgs, inputs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 
 let
-  flatpaks=''
-  app.fotema.Fotema
-  codes.loers.Karlender
-  com.bitwarden.desktop
-  com.dropbox.Client
-  com.github.PintaProject.Pinta
-  com.github.tchx84.Flatseal
-  com.github.wwmm.easyeffects
-  com.vscodium.codium
-  info.febvre.Komikku
-  io.github.alainm23.planify
-  it.mijorus.smile
-  org.cryptomator.Cryptomator
-  org.gnome.Loupe
-  org.libreoffice.LibreOffice
-  org.mozilla.firefox
-  org.mozilla.Thunderbird
-  org.pipewire.Helvum
+  flatpaks = ''
+    app.fotema.Fotema
+    codes.loers.Karlender
+    com.bitwarden.desktop
+    com.dropbox.Client
+    com.github.PintaProject.Pinta
+    com.github.tchx84.Flatseal
+    com.github.wwmm.easyeffects
+    com.vscodium.codium
+    info.febvre.Komikku
+    io.github.alainm23.planify
+    it.mijorus.smile
+    org.cryptomator.Cryptomator
+    org.gnome.Loupe
+    org.libreoffice.LibreOffice
+    org.mozilla.firefox
+    org.mozilla.Thunderbird
+    org.pipewire.Helvum
   '';
   systemScripts = import ./system-scripts.nix { inherit pkgs flatpaks; };
 in
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    ./hardware-configuration.nix
+  ];
 
   boot = {
     loader = {
@@ -58,10 +62,13 @@ in
     kernelParams = [ "amd_pstate=active" ];
   };
 
-  fileSystems."/mnt/data" =
-  { device = "/dev/disk/by-uuid/0b8080ed-91bb-4528-981d-b1c973581621";
+  fileSystems."/mnt/data" = {
+    device = "/dev/disk/by-uuid/0b8080ed-91bb-4528-981d-b1c973581621";
     fsType = "ext4";
-    options = [ "defaults" "nofail" ];
+    options = [
+      "defaults"
+      "nofail"
+    ];
   };
 
   hardware = {
@@ -74,7 +81,7 @@ in
     nameservers = [
       "94.140.14.14" # AdGuard
       "94.140.15.15" # AdGuard
-      "9.9.9.9"      # Quad9
+      "9.9.9.9" # Quad9
     ];
     networkmanager = {
       enable = true;
@@ -124,8 +131,14 @@ in
       randomizedDelaySec = "30min";
     };
     settings = {
-      experimental-features = [ "nix-command" "flakes" ];
-      trusted-users = [ "root" "richard" ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+      trusted-users = [
+        "root"
+        "richard"
+      ];
     };
   };
 
@@ -139,18 +152,22 @@ in
       dates = "Sat 00:00";
       randomizedDelaySec = "30min";
       flake = inputs.self.outPath;
-      flags = [ "--update-input" "nixpkgs" ];
+      flags = [
+        "--update-input"
+        "nixpkgs"
+      ];
     };
   };
 
   environment = {
     etc."xdg/mimeapps.list".text = ''
       [Default Applications]
-      x-scheme-handler/http=org.mozilla.firefox.desktop
-      x-scheme-handler/https=org.mozilla.firefox.desktop
       image/jpeg=org.gnome.Loupe.desktop
       image/png=org.gnome.Loupe.desktop
+      text/html=org.mozilla.firefox.desktop
       video/mp4=mpv.desktop
+      x-scheme-handler/http=org.mozilla.firefox.desktop
+      x-scheme-handler/https=org.mozilla.firefox.desktop
     '';
     systemPackages = with pkgs; [
       adwaita-icon-theme
@@ -163,20 +180,20 @@ in
       delta
       devenv
       distrobox
-      elephant                   # walker dependency
+      elephant # walker dependency
       eza
       fd
       ffmpegthumbnailer
       fzf
-      gexiv2                     # nautilus-media-columns dependency
+      gexiv2 # nautilus-media-columns dependency
       git
       git-lfs
       gnome-disk-utility
-      gst_all_1.gstreamer        # nautilus-media-columns dependency
+      gst_all_1.gstreamer # nautilus-media-columns dependency
       gst_all_1.gst-plugins-base # nautilus-media-columns dependency
       gst_all_1.gst-plugins-good # nautilus-media-columns dependency
-      gst_all_1.gst-plugins-bad  # nautilus-media-columns dependency
-      gst_all_1.gst-libav        # nautilus-media-columns dependency
+      gst_all_1.gst-plugins-bad # nautilus-media-columns dependency
+      gst_all_1.gst-libav # nautilus-media-columns dependency
       hyprpaper
       inputs.ironbar.packages.${pkgs.system}.default
       jq
@@ -185,7 +202,8 @@ in
       micro
       mpv
       nautilus
-      nautilus-python            # nautilus-media-columns dependency
+      nautilus-python # nautilus-media-columns dependency
+      nixfmt
       podman-compose
       psst
       qemu
@@ -208,7 +226,7 @@ in
     ];
     sessionVariables = {
       NAUTILUS_4_EXTENSION_DIR = "/run/current-system/sw/lib/nautilus/extensions-4"; # nautilus-media-columns dependency
-      GST_PLUGIN_SYSTEM_PATH_1_0 = "/run/current-system/sw/lib/gstreamer-1.0";       # nautilus-media-columns dependency
+      GST_PLUGIN_SYSTEM_PATH_1_0 = "/run/current-system/sw/lib/gstreamer-1.0"; # nautilus-media-columns dependency
     };
   };
 
@@ -258,42 +276,59 @@ in
     users."richard" = {
       isNormalUser = true;
       description = "richard";
-      extraGroups = [ "networkmanager" "wheel" ];
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+      ];
     };
   };
 
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.backupFileExtension = "bak";
-  home-manager.users."richard" = { pkgs, lib, config, ... }:
+  home-manager.users."richard" =
+    {
+      pkgs,
+      lib,
+      config,
+      ...
+    }:
 
-  let
-    username = config.home.username;
-    github="RichardFevrier"; # chezmoi config
-    ssh_auth_socks_flatpaks = [
-      "com.vscodium.codium"
-    ];
-    userScripts = import ./user-scripts.nix { inherit pkgs lib username github ssh_auth_socks_flatpaks; };
-  in
-  {
-    home = {
-      stateVersion = "25.05";
+    let
+      username = config.home.username;
+      github = "RichardFevrier"; # chezmoi config
+      ssh_auth_socks_flatpaks = [
+        "com.vscodium.codium"
+      ];
+      userScripts = import ./user-scripts.nix {
+        inherit
+          pkgs
+          lib
+          username
+          github
+          ssh_auth_socks_flatpaks
+          ;
+      };
+    in
+    {
+      home = {
+        stateVersion = "25.05";
 
-      # mask gcr-ssh-agent.service & gcr-ssh-agent.socket started by gvfs
-      activation.maskGcrSshAgent = lib.hm.dag.entryAfter ["writeBoundary"] ''
-        $DRY_RUN_CMD systemctl --user mask gcr-ssh-agent.service gcr-ssh-agent.socket 2>/dev/null || true
-      '';
-    };
-
-    systemd.user = {
-      sessionVariables = {
-        SSH_AUTH_SOCK = "/home/${username}/.var/app/com.bitwarden.desktop/data/.bitwarden-ssh-agent.sock";
+        # mask gcr-ssh-agent.service & gcr-ssh-agent.socket started by gvfs
+        activation.maskGcrSshAgent = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+          $DRY_RUN_CMD systemctl --user mask gcr-ssh-agent.service gcr-ssh-agent.socket 2>/dev/null || true
+        '';
       };
 
-      services."${username}-init" = userScripts.userInitService;
-      services.bitwarden-setup = userScripts.bitwardenSetupService;
+      systemd.user = {
+        sessionVariables = {
+          SSH_AUTH_SOCK = "/home/${username}/.var/app/com.bitwarden.desktop/data/.bitwarden-ssh-agent.sock";
+        };
+
+        services."${username}-init" = userScripts.userInitService;
+        services.bitwarden-setup = userScripts.bitwardenSetupService;
+      };
     };
-  };
 
   systemd.services.flatpak-init = systemScripts.flatpakInitService;
   systemd.services.flatpak-update = systemScripts.flatpakUpdateService;
