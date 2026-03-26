@@ -300,16 +300,12 @@ in
     let
       username = config.home.username;
       github = "RichardFevrier"; # chezmoi config
-      ssh_auth_socks_flatpaks = [
-        "com.vscodium.codium"
-      ];
       userScripts = import ./user-scripts.nix {
         inherit
           pkgs
           lib
           username
           github
-          ssh_auth_socks_flatpaks
           ;
       };
     in

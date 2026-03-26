@@ -3,7 +3,6 @@
   lib,
   username,
   github,
-  ssh_auth_socks_flatpaks,
 }:
 
 let
@@ -66,10 +65,6 @@ let
           .["global_desktopSettings_sshAgentEnabled"] = true
         ' "$DATA")
         echo "$content" > "$DATA"
-
-        for item in ${lib.concatStringsSep " " ssh_auth_socks_flatpaks}; do
-            ${pkgs.flatpak}/bin/flatpak override --user $item --env=SSH_AUTH_SOCK="$BITWARDEN_PATH/data/.bitwarden-ssh-agent.sock"
-        done
       '';
     };
     Install = {
