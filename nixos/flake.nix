@@ -15,6 +15,10 @@
       url = "github:JakeStanger/ironbar";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nirinit = {
+      url = "github:amaanq/nirinit";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -22,6 +26,7 @@
       nixpkgs,
       grub2-themes,
       home-manager,
+      nirinit,
       ...
     }:
     {
@@ -33,6 +38,7 @@
           ./hardware-configuration.nix
           grub2-themes.nixosModules.default
           home-manager.nixosModules.home-manager
+          nirinit.nixosModules.nirinit
         ];
       };
     };

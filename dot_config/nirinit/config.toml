@@ -1,0 +1,10 @@
+[launch]
+
+[skip]
+apps = [
+  com.bitwarden.desktop,
+  com.github.wwmm.easyeffects,
+  com.yubico.yubioath,
+  it.mijorus.smile,
+  org.cryptomator.Cryptomator,
+]

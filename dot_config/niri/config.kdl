@@ -153,7 +153,6 @@ spawn-at-startup "swayosd-server"
 spawn-at-startup "elephant"
 spawn-at-startup "walker --gapplication-service"
 spawn-at-startup "flatpak" "run" "com.github.wwmm.easyeffects"
-spawn-at-startup "flatpak" "run" "org.mozilla.firefox"
 spawn-at-startup "flatpak" "run" "com.bitwarden.desktop"
 
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png" // can't use $XDG_PICTURES_DIR see: https://github.com/YaLTeR/niri/issues/1842

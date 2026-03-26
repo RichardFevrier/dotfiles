@@ -242,6 +242,7 @@ in
     flatpak.enable = true;
     gnome.sushi.enable = true;
     gvfs.enable = true;
+    nirinit.enable = true;
     pipewire.enable = true;
     playerctld.enable = true;
 
