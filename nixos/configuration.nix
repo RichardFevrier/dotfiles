@@ -58,6 +58,9 @@ in
       };
       timeout = 10;
     };
+    kernel.sysctl = {
+      "vm.swappiness" = 1;
+    };
     kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [ "amd_pstate=active" ];
   };
