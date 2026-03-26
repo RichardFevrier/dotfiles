@@ -28,10 +28,6 @@ let
   systemScripts = import ./system-scripts.nix { inherit pkgs flatpaks; };
 in
 {
-  imports = [
-    ./hardware-configuration.nix
-  ];
-
   boot = {
     loader = {
       grub = {

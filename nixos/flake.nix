@@ -30,6 +30,7 @@
         specialArgs = { inherit inputs; };
         modules = [
           ./configuration.nix
+          ./hardware-configuration.nix
           grub2-themes.nixosModules.default
           home-manager.nixosModules.home-manager
         ];
