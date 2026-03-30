@@ -6,53 +6,67 @@
 }:
 
 let
-  userInit = pkgs.writeShellScript "${username}-init" ''
+  userInitScript = pkgs.writeShellScript "${username}-init" ''
     #!/usr/bin/env bash
     set -euo pipefail
+
+    ### Chezmoi
 
     ${pkgs.coreutils}/bin/mkdir -p ~/.config/chezmoi
     ${pkgs.curl}/bin/curl -L https://raw.githubusercontent.com/${github}/dotfiles/main/dot_config/chezmoi/chezmoi.yaml -o ~/.config/chezmoi/chezmoi.yaml
     ${pkgs.chezmoi}/bin/chezmoi init --apply ${github} && ${pkgs.chezmoi}/bin/chezmoi update
-    PATH=${pkgs.git}/bin:$PATH ${pkgs.yazi}/bin/ya pkg install
+
+    ### Micro
+
     if [ -f ~/.config/micro/plug/list.txt ]; then
       ${pkgs.coreutils}/bin/cat ~/.config/micro/plug/list.txt | ${pkgs.findutils}/bin/xargs ${pkgs.micro}/bin/micro -plugin install
     fi
-  '';
 
-  userInitPost = pkgs.writeShellScript "${username}-init-post" ''
-    #!/usr/bin/env bash
-    set -euo pipefail
+    ### Yazi
 
-    ${pkgs.findutils}/bin/find /home/${username}/.var/ -maxdepth 1 -type f -name '${username}-init-hash-*' -exec ${pkgs.coreutils}/bin/rm -f {} +
-    ${pkgs.coreutils}/bin/touch /home/${username}/.var/${username}-init-hash-${builtins.hashString "sha256" (toString userInit)}
+    PATH=${pkgs.git}/bin:$PATH ${pkgs.yazi}/bin/ya pkg install
   '';
 
   userInitService = {
     Unit = {
-      Description = "Run ${username} init";
-      ConditionPathExists = "!/home/${username}/.var/${username}-init-hash-${builtins.hashString "sha256" (toString userInit)}";
+      Description = "${username} init service";
+      ConditionPathExists = "!/home/${username}/.var/${username}-init-hash-${builtins.hashString "sha256" (toString userInitScript)}";
       After = [ "network-online.target" ];
       Wants = [ "network-online.target" ];
     };
     Service = {
       Type = "oneshot";
-      ExecStart = userInit;
-      ExecStartPost = userInitPost;
+      ExecStart = userInitScript;
+      ExecStartPost = pkgs.writeShellScript "${username}-init-post" ''
+        #!/usr/bin/env bash
+        set -euo pipefail
+
+        ${pkgs.findutils}/bin/find /home/${username}/.var/ -maxdepth 1 -type f -name '${username}-init-hash-*' -exec ${pkgs.coreutils}/bin/rm -f {} +
+        ${pkgs.coreutils}/bin/touch /home/${username}/.var/${username}-init-hash-${builtins.hashString "sha256" (toString userInitScript)}
+      '';
     };
     Install = {
       WantedBy = [ "default.target" ];
     };
   };
 
-  bitwardenSetupService = {
+  userStartupService = {
     Unit = {
-      Description = "Run Bitwarden setup";
+      Description = "${username} startup service";
+      After = [ "network-online.target" ];
+      Wants = [ "network-online.target" ];
     };
     Service = {
       Type = "oneshot";
-      ExecStart = pkgs.writeShellScript "bitwarden-setup" ''
+      ExecStart = pkgs.writeShellScript "${username}-startup" ''
         #!/usr/bin/env bash
         set -euo pipefail
+
+        ### Flatpak
+
+        ${pkgs.flatpak}/bin/flatpak override --user --nodevice=all --nofilesystem=host --nofilesystem=home --nofilesystem=/home/${username}/.ssh --nofilesystem=/home/${username}/.gnupg --no-talk-name=org.freedesktop.Flatpak
+
+        ### Bitwarden
 
         BITWARDEN_PATH="/home/${username}/.var/app/com.bitwarden.desktop"
 
@@ -71,7 +85,43 @@ let
       WantedBy = [ "default.target" ];
     };
   };
+
+  userMidnightService = {
+    Unit = {
+      Description = "${username} midnight service";
+      After = [ "network-online.target" ];
+      Wants = [ "network-online.target" ];
+    };
+    Service = {
+      Type = "oneshot";
+      ExecStart = pkgs.writeShellScript "${username}-midnight" ''
+        #!/usr/bin/env bash
+        set -euo pipefail
+
+        ### Micro
+
+        ${pkgs.micro}/bin/micro -plugin update
+
+        ### Yazi
+
+        ${pkgs.yazi}/bin/ya pkg upgrade
+      '';
+    };
+  };
+
+  userMidnightTimer = {
+    Unit = {
+      Description = "${username} midnight timer";
+    };
+    Timer = {
+      OnCalendar = "Mon..Sun 00:00";
+      Persistent = true;
+    };
+    Install = {
+      WantedBy = [ "timers.target" ];
+    };
+  };
 in
 {
-  inherit userInitService bitwardenSetupService;
+  inherit userInitService userStartupService userMidnightService userMidnightTimer;
 }

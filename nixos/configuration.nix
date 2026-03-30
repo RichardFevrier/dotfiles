@@ -321,16 +321,21 @@ in
           SSH_AUTH_SOCK = "/home/${username}/.var/app/com.bitwarden.desktop/data/.bitwarden-ssh-agent.sock";
         };
 
-        services."${username}-init" = userScripts.userInitService;
-        services.bitwarden-setup = userScripts.bitwardenSetupService;
+        services = {
+          "${username}-init" = userScripts.userInitService;
+          "${username}-startup" = userScripts.userStartupService;
+          "${username}-midnight" = userScripts.userMidnightService;
+        };
+
+        timers."${username}-midnight" = userScripts.userMidnightTimer;
       };
     };
 
-  systemd.services.flatpak-init = systemScripts.flatpakInitService;
-  systemd.services.flatpak-update = systemScripts.flatpakUpdateService;
-  systemd.timers.flatpak-update = systemScripts.flatpakUpdateTimer;
-  systemd.services.micro-update = systemScripts.microUpdateService;
-  systemd.timers.micro-update = systemScripts.microUpdateTimer;
-  systemd.services.yazi-update = systemScripts.yaziUpdateService;
-  systemd.timers.yazi-update = systemScripts.yaziUpdateTimer;
+  systemd = {
+    services = {
+      system-init = systemScripts.systemInitService;
+      system-midnight = systemScripts.systemMidnightService;
+    };
+    timers.system-midnight = systemScripts.systemMidnightTimer;
+  };
 }
