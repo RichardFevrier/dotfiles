@@ -169,6 +169,7 @@ in
       x-scheme-handler/https=org.mozilla.firefox.desktop
     '';
     systemPackages = with pkgs; [
+      _7zz
       adwaita-icon-theme
       apple-cursor
       bat
@@ -210,10 +211,12 @@ in
       resources
       ripgrep
       rnr
+      slirp4netns
       starship
       swaynotificationcenter
       swayosd
       tree
+      tree-sitter
       uutils-coreutils-noprefix
       vivid
       walker
