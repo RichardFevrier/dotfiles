@@ -312,11 +312,6 @@ in
     {
       home = {
         stateVersion = "25.05";
-
-        # mask gcr-ssh-agent.service & gcr-ssh-agent.socket started by gvfs
-        activation.maskGcrSshAgent = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-          $DRY_RUN_CMD systemctl --user mask gcr-ssh-agent.service gcr-ssh-agent.socket 2>/dev/null || true
-        '';
       };
 
       systemd.user = {
@@ -339,6 +334,16 @@ in
       system-init = systemScripts.systemInitService;
       system-midnight = systemScripts.systemMidnightService;
     };
+
     timers.system-midnight = systemScripts.systemMidnightTimer;
+
+    user = {
+      # mask gcr-ssh-agent started by gvfs
+      services.gcr-ssh-agent.enable = false;
+      sockets.gcr-ssh-agent.enable = false;
+      # mask speech synthesis
+      services.speech-dispatcher.enable = false;
+      sockets.speech-dispatcher.enable = false;
+    };
   };
 }
