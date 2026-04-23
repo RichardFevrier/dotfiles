@@ -30,27 +30,25 @@ in
 {
   boot = {
     loader = {
-      grub = {
+      limine = {
         enable = true;
-        configurationLimit = 5;
         efiSupport = true;
-        device = "nodev";
-        # on windows use: bcdedit /set "{bootmgr}" path \EFI\NIXOS-BOOT\GRUBX64.EFI
+        maxGenerations = 5;
+        # on windows use: bcdedit /set "{bootmgr}" path \EFI\BOOT\BOOTX64.EFI
         extraEntries = ''
-          menuentry "Windows 11" --class windows {
-            insmod part_gpt
-            insmod fat
-            insmod chain
-            search --no-floppy --fs-uuid --set=root A27E-D58C
-            chainloader /EFI/Microsoft/Boot/bootmgfw.efi
-          }
+          /Windows 11
+            protocol: efi
+            path: guid(9b1d5845-88d4-42ba-9fee-c459252ef7f2):/EFI/Microsoft/Boot/bootmgfw.efi
         '';
-      };
-      grub2-theme = {
-        enable = true;
-        theme = "stylish";
-        icon = "color";
-        screen = "ultrawide2k";
+        # https://search.nixos.org/options?&query=boot.loader.limine&show=option:boot.loader.limine.secureBoot.enable
+        #
+        # to enable secure boot:
+        #   1. BIOS: disable secure boot, set mode to custom, disable default factory keys
+        #   2. sudo sbctl create-keys (or restore `/var/lib/sbctl` if you already have some)
+        #   3. sudo sbctl enroll-keys --microsoft -f
+        #   4. enable this var
+        #   5. BIOS: enable secure boot
+        secureBoot.enable = true;
       };
       timeout = 10;
     };
@@ -216,6 +214,7 @@ in
       resources
       ripgrep
       rnr
+      sbctl
       slirp4netns
       starship
       swaynotificationcenter

@@ -3,10 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    grub2-themes = {
-      url = "github:vinceliuice/grub2-themes";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -24,7 +20,6 @@
   outputs =
     inputs@{
       nixpkgs,
-      grub2-themes,
       home-manager,
       nirinit,
       ...
@@ -36,7 +31,6 @@
         modules = [
           ./configuration.nix
           ./hardware-configuration.nix
-          grub2-themes.nixosModules.default
           home-manager.nixosModules.home-manager
           nirinit.nixosModules.nirinit
         ];
