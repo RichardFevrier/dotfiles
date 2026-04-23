@@ -5,6 +5,7 @@ apps = [
   com.bitwarden.desktop,
   com.github.wwmm.easyeffects,
   com.yubico.yubioath,
+  io.github.ungoogled_software.ungoogled_chromium,
   it.mijorus.smile,
   org.cryptomator.Cryptomator,
 ]
