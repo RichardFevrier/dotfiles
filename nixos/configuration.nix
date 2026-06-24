@@ -153,10 +153,9 @@ in
       persistent = true;
       dates = "Sat 00:00";
       randomizedDelaySec = "30min";
-      flake = inputs.self.outPath;
+      flake = "/etc/nixos";
       flags = [
-        "--update-input"
-        "nixpkgs"
+        "--recreate-lock-file"
       ];
     };
   };
