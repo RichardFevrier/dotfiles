@@ -25,7 +25,8 @@ let
     org.mozilla.Thunderbird
     org.pipewire.Helvum
   '';
-  systemScripts = import ./system-scripts.nix { inherit pkgs flatpaks; };
+  globalScripts = import ./global-scripts.nix { inherit pkgs; };
+  systemScripts = import ./system-scripts.nix { inherit pkgs flatpaks globalScripts; };
 in
 {
   boot = {
@@ -34,6 +35,9 @@ in
         enable = true;
         efiSupport = true;
         maxGenerations = 5;
+        extraConfig = ''
+          remember_last_entry: yes
+        '';
         # on windows use: bcdedit /set "{bootmgr}" path \EFI\BOOT\BOOTX64.EFI
         extraEntries = ''
           /Windows 11
@@ -119,13 +123,7 @@ in
   };
 
   nix = {
-    gc = {
-      automatic = true;
-      dates = "Sun 00:00";
-      persistent = true;
-      options = "--delete-older-than 14d";
-      randomizedDelaySec = "30min";
-    };
+    gc.automatic = false;
     optimise = {
       automatic = true;
       dates = "Mon 00:00";
@@ -156,6 +154,7 @@ in
       flake = "/etc/nixos";
       flags = [
         "--recreate-lock-file"
+        "-L"
       ];
     };
   };
@@ -246,6 +245,7 @@ in
   services = {
     displayManager.ly.enable = true;
     flatpak.enable = true;
+    gnome.gnome-keyring.enable = true;
     gnome.sushi.enable = true;
     gvfs.enable = true;
     nirinit.enable = true;
@@ -309,6 +309,7 @@ in
           lib
           username
           github
+          globalScripts
           ;
       };
     in
@@ -324,10 +325,12 @@ in
 
         services = {
           "${username}-init" = userScripts.userInitService;
+          "${username}-weekly" = userScripts.userWeeklyService;
           "${username}-startup" = userScripts.userStartupService;
           "${username}-midnight" = userScripts.userMidnightService;
         };
 
+        timers."${username}-weekly" = userScripts.userWeeklyTimer;
         timers."${username}-midnight" = userScripts.userMidnightTimer;
       };
     };
@@ -335,9 +338,11 @@ in
   systemd = {
     services = {
       system-init = systemScripts.systemInitService;
+      system-weekly = systemScripts.systemWeeklyService;
       system-midnight = systemScripts.systemMidnightService;
     };
 
+    timers.system-weekly = systemScripts.systemWeeklyTimer;
     timers.system-midnight = systemScripts.systemMidnightTimer;
 
     user = {

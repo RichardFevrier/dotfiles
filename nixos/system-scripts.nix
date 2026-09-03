@@ -1,8 +1,11 @@
-{ pkgs, flatpaks }:
+{
+  pkgs,
+  flatpaks,
+  globalScripts,
+}:
 
 let
   systemInitScript = pkgs.writeShellScript "system-init" ''
-    #!/usr/bin/env bash
     set -euo pipefail
 
     ### Flatpak
@@ -30,7 +33,6 @@ let
       Type = "oneshot";
       ExecStart = systemInitScript;
       ExecStartPost = pkgs.writeShellScript "system-init-post" ''
-        #!/usr/bin/env bash
         set -euo pipefail
 
         ${pkgs.findutils}/bin/find /var/ -maxdepth 1 -type f -name 'system-init-hash-*' -exec ${pkgs.coreutils}/bin/rm -f {} +
@@ -38,6 +40,32 @@ let
       '';
     };
     wantedBy = [ "multi-user.target" ];
+  };
+
+  systemWeeklyService = {
+    unitConfig = {
+      Description = "system weekly service";
+      After = [ "network-online.target" ];
+      Wants = [ "network-online.target" ];
+    };
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = [
+        "${globalScripts.nixGcCleanup} /nix/var/nix/profiles/system"
+        "${pkgs.nix}/bin/nix-collect-garbage"
+      ];
+    };
+  };
+
+  systemWeeklyTimer = {
+    unitConfig = {
+      Description = "system weekly timer";
+    };
+    timerConfig = {
+      OnCalendar = "Sun 00:00";
+      Persistent = true;
+    };
+    wantedBy = [ "timers.target" ];
   };
 
   systemMidnightService = {
@@ -49,7 +77,6 @@ let
     serviceConfig = {
       Type = "oneshot";
       ExecStart = pkgs.writeShellScript "system-midnight" ''
-        #!/usr/bin/env bash
         set -euo pipefail
 
         ### Flatpak
@@ -73,6 +100,8 @@ in
 {
   inherit
     systemInitService
+    systemWeeklyService
+    systemWeeklyTimer
     systemMidnightService
     systemMidnightTimer
     ;

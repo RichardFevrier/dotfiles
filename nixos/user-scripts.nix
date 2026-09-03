@@ -3,11 +3,11 @@
   lib,
   username,
   github,
+  globalScripts,
 }:
 
 let
   userInitScript = pkgs.writeShellScript "${username}-init" ''
-    #!/usr/bin/env bash
     set -euo pipefail
 
     ### Chezmoi
@@ -38,7 +38,6 @@ let
       Type = "oneshot";
       ExecStart = userInitScript;
       ExecStartPost = pkgs.writeShellScript "${username}-init-post" ''
-        #!/usr/bin/env bash
         set -euo pipefail
 
         ${pkgs.findutils}/bin/find /home/${username}/.var/ -maxdepth 1 -type f -name '${username}-init-hash-*' -exec ${pkgs.coreutils}/bin/rm -f {} +
@@ -47,6 +46,34 @@ let
     };
     Install = {
       WantedBy = [ "default.target" ];
+    };
+  };
+
+  userWeeklyService = {
+    Unit = {
+      Description = "${username} weekly service";
+      After = [ "network-online.target" ];
+      Wants = [ "network-online.target" ];
+    };
+    Service = {
+      Type = "oneshot";
+      ExecStart = [
+        "${globalScripts.nixGcCleanup} /home/${username}/.local/state/nix/profiles/profile"
+        "${pkgs.nix}/bin/nix-collect-garbage"
+      ];
+    };
+  };
+
+  userWeeklyTimer = {
+    Unit = {
+      Description = "${username} weekly timer";
+    };
+    Timer = {
+      OnCalendar = "Sun 00:00";
+      Persistent = true;
+    };
+    Install = {
+      WantedBy = [ "timers.target" ];
     };
   };
 
@@ -59,7 +86,6 @@ let
     Service = {
       Type = "oneshot";
       ExecStart = pkgs.writeShellScript "${username}-startup" ''
-        #!/usr/bin/env bash
         set -euo pipefail
 
         ### Flatpak
@@ -95,7 +121,6 @@ let
     Service = {
       Type = "oneshot";
       ExecStart = pkgs.writeShellScript "${username}-midnight" ''
-        #!/usr/bin/env bash
         set -euo pipefail
 
         ### Micro
@@ -123,5 +148,12 @@ let
   };
 in
 {
-  inherit userInitService userStartupService userMidnightService userMidnightTimer;
+  inherit
+    userInitService
+    userWeeklyService
+    userWeeklyTimer
+    userStartupService
+    userMidnightService
+    userMidnightTimer
+    ;
 }
