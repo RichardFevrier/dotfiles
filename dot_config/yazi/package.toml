@@ -1,7 +1,7 @@
 [[plugin.deps]]
 use = "KKV9/compress"
-rev = "e60e122"
-hash = "fbaf0adc8efc59555b748d36aab62d40"
+rev = "80e5268"
+hash = "868db729374b97871bc30b96d0e9061f"
 
 [[plugin.deps]]
 use = "Lil-Dank/lazygit"
@@ -10,17 +10,17 @@ hash = "6ea5f37c7f219671ec504cb8311f889d"
 
 [[plugin.deps]]
 use = "Rolv-Apneseth/starship"
-rev = "159eaba"
-hash = "7de446280b1ba8c49ffd86dbc24bbbe6"
+rev = "ea92cf4"
+hash = "9776f378459072b6c2875eae5addc49d"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:toggle-pane"
-rev = "9014ed2"
-hash = "15e5b67a241172cbb86b8fbf9e63692"
+rev = "6229767"
+hash = "5b2fbef7d1513ce38ff72623a071a5e"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-enter"
-rev = "9014ed2"
+rev = "6229767"
 hash = "187cc58ba7ac3befd49c342129e6f1b6"
 
 [flavor]
