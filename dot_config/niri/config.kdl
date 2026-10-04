@@ -120,6 +120,7 @@ binds {
     Mod+Period              { expel-window-from-column; }
 
     Mod+R                   { switch-preset-column-width; }
+    Mod+Shift+R             { switch-preset-column-width-back; }
     Mod+F                   { maximize-column; }
     Mod+Shift+F             { fullscreen-window; }
 
