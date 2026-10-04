@@ -9,3 +9,6 @@ apps = [
   it.mijorus.smile,
   org.cryptomator.Cryptomator,
 ]
+
+[launch]
+"org.wezfurlong.wezterm" = "wezterm"
