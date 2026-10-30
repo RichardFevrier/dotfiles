@@ -148,7 +148,7 @@ environment {
 
 spawn-at-startup "xwayland-satellite"
 spawn-at-startup "ironbar"
-spawn-at-startup "hyprpaper"
+spawn-at-startup "swaybg" "--image" "/home/richard/Pictures/Wallpapers/3440x1440_1.png"
 spawn-at-startup "swaync"
 spawn-at-startup "swayosd-server"
 spawn-at-startup "elephant"

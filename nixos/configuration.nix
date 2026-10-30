@@ -36,6 +36,7 @@ in
         efiSupport = true;
         maxGenerations = 5;
         extraConfig = ''
+          mouse: no
           remember_last_entry: yes
         '';
         # on windows use: bcdedit /set "{bootmgr}" path \EFI\BOOT\BOOTX64.EFI
@@ -124,6 +125,7 @@ in
 
   nix = {
     gc.automatic = false;
+    package = pkgs.lixPackageSets.stable.lix;
     optimise = {
       automatic = true;
       dates = "Mon 00:00";
@@ -186,7 +188,7 @@ in
       fd
       ffmpegthumbnailer
       fzf
-      gexiv2 # nautilus-media-columns dependency
+      gexiv2_0_10 # nautilus-media-columns dependency
       git
       git-lfs
       gnome-disk-utility
@@ -195,7 +197,6 @@ in
       gst_all_1.gst-plugins-good # nautilus-media-columns dependency
       gst_all_1.gst-plugins-bad # nautilus-media-columns dependency
       gst_all_1.gst-libav # nautilus-media-columns dependency
-      hyprpaper
       inputs.ironbar.packages.${pkgs.system}.default
       jq
       lazygit
@@ -215,6 +216,7 @@ in
       sbctl
       slirp4netns
       starship
+      swaybg
       swaynotificationcenter
       swayosd
       tree
@@ -273,7 +275,8 @@ in
     enable = true;
     extraPortals = with pkgs; [
       # xdg-desktop-portal-termfilepickers < wait for merged
-      xdg-desktop-portal-wlr
+      xdg-desktop-portal-gnome
+      xdg-desktop-portal-gtk
     ];
   };
 
@@ -335,11 +338,18 @@ in
       };
     };
 
+
   systemd = {
     services = {
       system-init = systemScripts.systemInitService;
       system-weekly = systemScripts.systemWeeklyService;
       system-midnight = systemScripts.systemMidnightService;
+    };
+
+    sleep.settings.Sleep = {
+      AllowHibernation = "no";
+      AllowHybridSleep = "no";
+      AllowSuspendThenHibernate = "no";
     };
 
     timers.system-weekly = systemScripts.systemWeeklyTimer;
