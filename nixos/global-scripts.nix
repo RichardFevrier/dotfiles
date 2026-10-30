@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  nixGcCleanup = pkgs.writeShellScript "nix-gc-cleanup" ''
+  nixGcCleanup = pkgs.writeShellApplication "nix-gc-cleanup" ''
     set -euo pipefail
 
     KEEP_MIN=2

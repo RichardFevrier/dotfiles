@@ -7,7 +7,7 @@
 }:
 
 let
-  userInitScript = pkgs.writeShellScript "${username}-init" ''
+  userInitScript = pkgs.writeShellApplication "${username}-init" ''
     set -euo pipefail
 
     ### Chezmoi
@@ -37,7 +37,7 @@ let
     Service = {
       Type = "oneshot";
       ExecStart = userInitScript;
-      ExecStartPost = pkgs.writeShellScript "${username}-init-post" ''
+      ExecStartPost = pkgs.writeShellApplication "${username}-init-post" ''
         set -euo pipefail
 
         ${pkgs.findutils}/bin/find /home/${username}/.var/ -maxdepth 1 -type f -name '${username}-init-hash-*' -exec ${pkgs.coreutils}/bin/rm -f {} +
@@ -85,7 +85,7 @@ let
     };
     Service = {
       Type = "oneshot";
-      ExecStart = pkgs.writeShellScript "${username}-startup" ''
+      ExecStart = pkgs.writeShellApplication "${username}-startup" ''
         set -euo pipefail
 
         ### Flatpak
@@ -120,7 +120,7 @@ let
     };
     Service = {
       Type = "oneshot";
-      ExecStart = pkgs.writeShellScript "${username}-midnight" ''
+      ExecStart = pkgs.writeShellApplication "${username}-midnight" ''
         set -euo pipefail
 
         ### Micro

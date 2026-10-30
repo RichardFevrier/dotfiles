@@ -5,7 +5,7 @@
 }:
 
 let
-  systemInitScript = pkgs.writeShellScript "system-init" ''
+  systemInitScript = pkgs.writeShellApplication "system-init" ''
     set -euo pipefail
 
     ### Flatpak
@@ -32,7 +32,7 @@ let
     serviceConfig = {
       Type = "oneshot";
       ExecStart = systemInitScript;
-      ExecStartPost = pkgs.writeShellScript "system-init-post" ''
+      ExecStartPost = pkgs.writeShellApplication "system-init-post" ''
         set -euo pipefail
 
         ${pkgs.findutils}/bin/find /var/ -maxdepth 1 -type f -name 'system-init-hash-*' -exec ${pkgs.coreutils}/bin/rm -f {} +
@@ -76,7 +76,7 @@ let
     };
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = pkgs.writeShellScript "system-midnight" ''
+      ExecStart = pkgs.writeShellApplication "system-midnight" ''
         set -euo pipefail
 
         ### Flatpak

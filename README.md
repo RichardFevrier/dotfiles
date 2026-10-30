@@ -84,7 +84,7 @@ Use [Karabiner-Elements](https://karabiner-elements.pqrs.org/) (config included)
 ## Status bar
 [Ironbar](https://github.com/JakeStanger/ironbar)
 ## Wallpaper displayer
-[Hyprpaper](https://wiki.hypr.land/Hypr-Ecosystem/hyprpaper/)
+[swaybg](https://github.com/swaywm/swaybg)
 ## Notifications manager
 [SwayNC](https://github.com/ErikReider/SwayNotificationCenter)
 ## OSD
